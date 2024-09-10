@@ -17,4 +17,4 @@ These are the steps we broke down the process into:
     ![Screenshot 2024-09-10 132717](https://github.com/user-attachments/assets/8af09870-8e4b-4e6a-94a4-5fb886f86f63)
 
 ### 2. Model Building and Training 
-* 
+  *
