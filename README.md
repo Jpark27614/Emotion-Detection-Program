@@ -20,3 +20,11 @@ These are the steps we broke down the process into:
   * We're planning to use [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/blob/master/README.md) for the base of our emotion detection model.
     * We then [installed](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation) OpenFace with the help of a [tutorial](https://www.youtube.com/watch?v=qknAAax8aCo).
   * **Training:** The process of feeding the model validated images to learn what different emotions look like. 
+
+### 3. Video Detection 
+  * **Preprocessing:** Extracting frames to analyze and process each frame to detect the emotion.
+  * **Real-Time Detection:** Using frames from a webcam to process real-time emotions.
+
+### 4. Evaluation and Detection 
+  * **Model Evaluation:** Test and analyze the accuracy of the model, as well as the confusion matrix.
+    * [Confusion Matrix]: A table layout used to visulaize performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
