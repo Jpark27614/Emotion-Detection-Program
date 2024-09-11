@@ -18,3 +18,4 @@ These are the steps we broke down the process into:
 
 ### 2. Model Building and Training 
   * We plan to use [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/blob/master/README.md) for the base of our emotion detection model.
+  * Next we [installed](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation) OpenFace with the help of a [tutorial](https://www.youtube.com/watch?v=qknAAax8aCo)
