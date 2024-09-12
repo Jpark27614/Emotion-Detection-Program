@@ -1,8 +1,9 @@
 # Emotion-Detection-Program
 
 ## Table of Contents
-* [Research](#Research)
 * [Our Project](#Our_Project)
+* [Research](#Research)
+
 
 ## Our_Project 
 Our project is an emotion detection program using a webcam as an input. 
