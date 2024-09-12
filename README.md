@@ -27,4 +27,4 @@ These are the steps we broke down the process into:
 
 ### 4. Evaluation and Detection 
   * **Model Evaluation:** Test and analyze the accuracy of the model, as well as the confusion matrix.
-    * [Confusion Matrix] A table layout used to visulaize performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
+    * _Confusion Matrix_ A table layout used to visulaize performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
