@@ -38,8 +38,3 @@ These are the steps we broke down the process into:
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
 
-## Weekly Overview
-
-**Week 4** 
-
-
