@@ -3,6 +3,7 @@
 ## Table of Contents
 * [Our Project](#Our_Project)
 * [Research](#Research)
+* [Weekly Overview](#Weekly_Overview)
 
 ### Problem: 
 byugv
@@ -36,5 +37,8 @@ These are the steps we broke down the process into:
     * **Confusion Matrix:** A table layout used to visulaize performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
 ![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)
 
-  * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
+  * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...\
+
+## Weekly_Overview 
+
 
