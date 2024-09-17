@@ -13,7 +13,7 @@ xxx
 Our project is an emotion detection program using a webcam as an input. 
 
 ## Schedule 
-''' Ruby
+'''ruby
 * Finish brainstorm and research- Weeks 3-4
 * Research, install OpenFace, and test- Weeks 4-5
 * Develop and finalize our application for emotion detection- Weeks 5-7
