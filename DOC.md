@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/22897eb1-97b1-4257-bc90-ea6a54b04863
 
 An additional test was performed using multiple faces. The following command line was implented: 
 
-``` // Places landmarks on the video for multiple faces
+```ruby // Places landmarks on the video for multiple faces
 .\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output" ```
 
 
