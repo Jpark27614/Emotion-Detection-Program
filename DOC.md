@@ -9,7 +9,7 @@
 Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
 Note that videos must be in mp4 format to run through OpenFace application. The following command lines were used to run sequence analysis (locate facial points) on a video with one person (command line argument: ```FaceLandmarkVid```): 
 
-```ruby
+```
 // Locate OpenFace Directory
 cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
 
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/22897eb1-97b1-4257-bc90-ea6a54b04863
 
 An additional test was performed using multiple faces. The following command line was implented: 
 
-```ruby // Places landmarks on the video for multiple faces
+``` // Places landmarks on the video for multiple faces
 .\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output" ```
 
 
