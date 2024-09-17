@@ -2,8 +2,8 @@
 
 ## Table of Contents
 * [Description](#Description)
-* [Research](#Research)
 * [Schedule](#Schedule)
+* [Research](#Research)
 * [Weekly Overview](#Weekly_Overview)
 
 ### Problem: 
@@ -11,6 +11,13 @@ xxx
 
 ## Description
 Our project is an emotion detection program using a webcam as an input. 
+
+## Schedule 
+* Finish brainstorm and research- Weeks 3-4
+* Research, install OpenFace, and test- Weeks 4-5
+* Develop and finalize our application for emotion detection- Weeks 5-7
+* Test and create code for the application and response- Weeks 7-15
+* Document- Weeks 4-17
 
 ## Research 
 Our first step was to comprehend the steps and process of facial recognition. We used the website [Medium.com](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d) to break down the process of facial recognition into manageable chunks. 
@@ -39,13 +46,6 @@ These are the steps we broke down the process into:
 ![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...\
-
-## Schedule 
-* Finish brainstorm and research- Weeks 3-4
-* Research, install OpenFace, and test- Weeks 4-5
-* Develop and finalize our application for emotion detection- Weeks 5-7
-* Test and create code for the application and response- Weeks 7-15
-* Document- Weeks 4-17
 
 ## Weekly_Overview 
 
