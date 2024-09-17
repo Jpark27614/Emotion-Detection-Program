@@ -13,7 +13,7 @@ Note that videos must be in mp4 format to run through OpenFace application. The 
 // Locate OpenFace Directory
 cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
 
-// Places landmarks on the video for Facial Recognition (FR) ----
+// Places landmarks on the video for Facial Recognition (FR) 
 .\FaceLandmarkVid.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
 
 ```
@@ -23,8 +23,12 @@ https://github.com/user-attachments/assets/22897eb1-97b1-4257-bc90-ea6a54b04863
 
 An additional test was performed using multiple faces. The following command line was implented: 
 
-``` // Places landmarks on the video for multiple faces
-.\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output" ```
+```
+// Places landmarks on the video for multiple faces
+.\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
+```
+
+https://github.com/user-attachments/assets/33e166a9-8f0f-49f1-82b5-e32fe2e96587
 
 
 
