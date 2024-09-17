@@ -3,6 +3,7 @@
 ## Table of Contents
 * [Description](#Description)
 * [Research](#Research)
+* [Schedule](#Schedule)
 * [Weekly Overview](#Weekly_Overview)
 
 ### Problem: 
