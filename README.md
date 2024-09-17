@@ -13,11 +13,13 @@ xxx
 Our project is an emotion detection program using a webcam as an input. 
 
 ## Schedule 
+''' Ruby
 * Finish brainstorm and research- Weeks 3-4
 * Research, install OpenFace, and test- Weeks 4-5
 * Develop and finalize our application for emotion detection- Weeks 5-7
 * Test and create code for the application and response- Weeks 7-15
 * Document- Weeks 4-17
+'''
 
 ## Research 
 Our first step was to comprehend the steps and process of facial recognition. We used the website [Medium.com](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d) to break down the process of facial recognition into manageable chunks. 
