@@ -39,8 +39,19 @@ These are the steps we broke down the process into:
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...\
 
+## Schedule 
+* Finish brainstorm and research- Weeks 3-4
+* Research, install OpenFace, and test- Weeks 4-5
+* Develop and finalize our application for emotion detection- Weeks 5-7
+* Test and create code for the application and response- Weeks 7-15
+* Document- Weeks 4-17
+
 ## Weekly_Overview 
 
 ### Week 4 
+* We installed OpenFace and tested out the program with videos. We also started documentation for our research and process on GitHub.
+
+### Week 5
+* 
 
 
