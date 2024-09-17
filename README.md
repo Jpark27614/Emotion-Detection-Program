@@ -4,7 +4,6 @@
 * [Description](#Description)
 * [Schedule](#Schedule)
 * [Research](#Research)
-* [Weekly Overview](#Weekly_Overview)
 
 ### Problem: 
 xxx
@@ -47,12 +46,6 @@ These are the steps we broke down the process into:
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...\
 
-## Weekly_Overview 
 
-### Week 4 
-* We installed OpenFace and tested out the program with videos. We also started documentation for our research and process on GitHub.
-
-### Week 5
-* 
 
 
