@@ -32,5 +32,13 @@ An additional test was performed using multiple faces. The following command lin
 https://github.com/user-attachments/assets/33e166a9-8f0f-49f1-82b5-e32fe2e96587
 
 
+## Week of 9/16/24
+### Goals
+- Research action units (AU) and define emotions based on AU
+- Brainstorm applications of emotion recognition
+- Start using OpenFace on VSCode
+-----
+
+
 
 
