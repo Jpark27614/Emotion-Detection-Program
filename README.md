@@ -44,6 +44,7 @@ These are the steps we broke down the process into:
 ## Action Units  
 [Faccial Action](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
 [other](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/)
+[Ekman](https://www.paulekman.com/)
 
 ## Application 
  
