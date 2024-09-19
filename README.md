@@ -6,12 +6,6 @@
 * [Research](#Research)
 * [Application](#Application) 
 
-### Problem: 
-xxx
-
-## Description
-Our project is an emotion detection program using a webcam as an input. 
-
 ## Schedule 
 
 * Finish brainstorm and research- Weeks 3-4
