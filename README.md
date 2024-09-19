@@ -1,7 +1,6 @@
 # Emotion-Detection-Program
 
 ## Table of Contents
-* [Description](#Description)
 * [Schedule](#Schedule)
 * [Research](#Research)
 * [Application](#Application) 
