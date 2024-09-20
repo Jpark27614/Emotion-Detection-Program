@@ -47,16 +47,33 @@ import subprocess
 import os
 import csv
 import pandas as pd
+import cv2
+
+
 
 
 # Set up paths
 openface_dir = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86'  # Update this path
-video_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video2.mp4'
+video_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video4.mp4'
 output_dir = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS'
+
+
+# Open the video file
+video = cv2.VideoCapture(video_file)
+
+# Get the FPS (Frames Per Second)
+fps = video.get(cv2.CAP_PROP_FPS)
+
+# Print the FPS value
+print(f"Frames per second (FPS): {fps}")
+
+# Release the video file
+video.release()
+
 
 # Define the command
 command = [
-    os.path.join(openface_dir, 'FaceLandmarkVidMulti.exe'),  # OpenFace binary
+    os.path.join(openface_dir, 'FeatureExtraction.exe'),  # OpenFace binary
     '-f', video_file,  # Input video
     '-out_dir', output_dir  # Output directory
 ]
@@ -65,31 +82,76 @@ command = [
 subprocess.run(command)
 
 # Path to your CSV file
-csv_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS\example_video2.csv'
+csv_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS\example_video4.csv'
 
-# Open and read the CSV file
-with open(csv_file, mode='r') as file:
-    reader = csv.reader(file)
-    
-    # Skip the header if necessary
-    header = next(reader)
 
-    # Iterate through the rows
-    for row in reader:
-        print(row)
 
 # Read the CSV file into a DataFrame
 df = pd.read_csv(csv_file)
 
-# List all columns (helps you find where the AU data starts)
-print(df.columns)
+# Clean column names by removing leading/trailing spaces
+df.columns = df.columns.str.strip()
 
-# Extract intensity columns (r for regressor)
-au_intensity_columns = [col for col in df.columns if '_r' in col]
-print("Action Unit Intensity Columns:", au_intensity_columns)
 
-# Example: Extract AU12 (lip corner puller) intensities
-au12_intensity = df['AU12_r']
-print("AU12 Intensity Values:", au12_intensity)
+
+# Set your thresholds for each AU
+thresholds = {
+    'Happiness': (0.5, 0.5),  # AU01_r, AU06_r
+    'Sadness': (0.5, 0.5),    # AU01_r, AU04_r
+    'Anger': (0.5, 0.5, 0.5),  # AU04_r, AU07_r, AU05_r
+    'Surprise': (0.5, 0.5),    # AU05_r, AU26_r
+    'Fear': (0.5, 0.5, 0.5),   # AU01_r, AU02_r, AU05_r
+    'Neutral': (0.2, 0.2)       # All AUs below this threshold
+}
+
+# Function to detect emotions
+def detect_emotions_in_seconds(df, fps):
+    results = {emotion: [] for emotion in thresholds.keys()}
+
+    for index, row in df.iterrows():
+        # Convert frame number to seconds 
+        time_in_seconds = row['timestamp']
+
+        # Check for happiness
+        if row['AU01_r'] > thresholds['Happiness'][0] and row['AU06_r'] > thresholds['Happiness'][1]:
+            results['Happiness'].append(time_in_seconds)
+
+        # Check for sadness
+        if row['AU01_r'] > thresholds['Sadness'][0] and row['AU04_r'] > thresholds['Sadness'][1]:
+            results['Sadness'].append(time_in_seconds)
+
+        # Check for anger
+        if row['AU04_r'] > thresholds['Anger'][0] and row['AU07_r'] > thresholds['Anger'][1] and row['AU05_r'] > thresholds['Anger'][2]:
+            results['Anger'].append(time_in_seconds)
+
+        # Check for surprise
+        if row['AU05_r'] > thresholds['Surprise'][0] and row['AU26_r'] > thresholds['Surprise'][1]:
+            results['Surprise'].append(time_in_seconds)
+
+        # Check for fear
+        if row['AU01_r'] > thresholds['Fear'][0] and row['AU02_r'] > thresholds['Fear'][1] and row['AU05_r'] > thresholds['Fear'][2]:
+            results['Fear'].append(time_in_seconds)
+
+        # Check for neutral (if all AUs are below the neutral threshold)
+        if (row['AU01_r'] < thresholds['Neutral'][0] and
+            row['AU02_r'] < thresholds['Neutral'][0] and
+            row['AU04_r'] < thresholds['Neutral'][0] and
+            row['AU05_r'] < thresholds['Neutral'][0] and
+            row['AU06_r'] < thresholds['Neutral'][0] and
+            row['AU07_r'] < thresholds['Neutral'][0] and
+            row['AU26_r'] < thresholds['Neutral'][0]):
+            results['Neutral'].append(time_in_seconds)
+
+    return results
+
+# Detect emotions in the video
+emotion_results_in_seconds = detect_emotions_in_seconds(df, fps)
+
+# Print the results
+for emotion, times in emotion_results_in_seconds.items():
+    if times:
+        print(f"{emotion} detected at seconds: {times}")
+    else:
+        print(f"No {emotion} detected.")
 ```
 
