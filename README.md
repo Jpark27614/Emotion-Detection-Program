@@ -57,6 +57,8 @@ For our research on Action units websites and articles were very useful. A good 
 
 **Fear:** 1 + 2 + 4 + 5 + 7 + 20 + 26 (Inner Brow Raiser + Outer Brow Raiser + Brow Lowerer + Upper Lid Raiser + Tightener + Lip Strecher + Jaw Drop) 
 
+**Anger:** 4 + 5 + 7 + 23 (Brow Lowerer + Upper Lid Raiser + Lid Tightener + Lip Tightener) 
+
 
 
 ## Application 
