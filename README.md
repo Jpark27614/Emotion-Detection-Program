@@ -55,6 +55,10 @@ Sadness: 1 + 4 + 15 (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor
 
 Suprise: 1 + 2 + 5 + 26 (Inner Brow Raiser + Outer Brow Raiser + Upper Lid Raiser + Jaw Drop)
 
+Fear: 1 + 2 + 4 + 5 + 7 + 20 + 26 (Inner Brow Raiser + Outer Brow Raiser + Brow Lowerer + Upper Lid Raiser + Tightener + Lip Strecher + Jaw Drop) 
+
+
+
 ## Application 
  
 
