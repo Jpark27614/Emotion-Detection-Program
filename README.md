@@ -59,7 +59,7 @@ For our research on Action units websites and articles were very useful. A good 
 
 **Anger:** 4 + 5 + 7 + 23 (Brow Lowerer + Upper Lid Raiser + Lid Tightener + Lip Tightener) 
 
-
+**Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
 ## Application 
  
