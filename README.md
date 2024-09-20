@@ -37,15 +37,13 @@ These are the steps we broke down the process into:
 ### 4. Evaluation and Detection 
   * **Model Evaluation:** Test and analyze the accuracy of the model, as well as the confusion matrix.
     * **Confusion Matrix:** A table layout used to visualize the performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
-![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)
-[Image](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d)
+![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)[Image](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d)
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
 
 ## Action Units  
 An Action Unit is a measure of the facial muscle movements defined by the Facial Action Coding System (FACS). We take the data from the action units to see what emotion is displayed. For example, happiness is represented by raised cheeks and a pulled corner lip (6+12). 
-![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/bf387529-dc32-472d-895a-9257a0826d3c)
-[Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
+![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/bf387529-dc32-472d-895a-9257a0826d3c)[Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
 
 For our research on Action units websites and articles were very useful. A good source for understanding what AU is on [Imotions](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/). Another website that was useful to us was [The Emotional Intelligence Agency](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/). These sources cannot be credible without mentioning [Paul Ekman](https://www.paulekman.com/). Ekman is a huge name in the field of emotion detection, he discovered that some facial expressions of emotions are universal and co-discovered micro-expressions. His research has changed how we think about emotional expression and influenced Action Units. 
 
