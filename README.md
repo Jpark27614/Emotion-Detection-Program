@@ -38,6 +38,7 @@ These are the steps we broke down the process into:
   * **Model Evaluation:** Test and analyze the accuracy of the model, as well as the confusion matrix.
     * **Confusion Matrix:** A table layout used to visualize the performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
 ![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)
+[Image](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d)
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
 
