@@ -18,9 +18,9 @@ cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
 
 ```
 
-This resulted in an avi file with the designed FR points, and a large data table. 
+This resulted in an avi file with the designed FR points, and a large data table (csv file). 
 
-https://github.com/user-attachments/assets/22897eb1-97b1-4257-bc90-ea6a54b04863
+https://github.com/user-attachments/assets/06a0686e-6d9e-4fc9-a614-468a45c967a4
 
 An additional test was performed using multiple faces. The following command line was implented: 
 
