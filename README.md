@@ -46,7 +46,8 @@ An Action Unit is a measure of the facial muscle movements defined by the Facial
 ![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/bf387529-dc32-472d-895a-9257a0826d3c)
 [Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
 
-[other](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/)
+For our research on Action units websites and articles were very useful. A good source for understanding what AU is on Imotions [website](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/). Another website that was useful to us was [The Emotional Intelligence Agency](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/).
+
 [Ekman](https://www.paulekman.com/)
 
 ## Application 
