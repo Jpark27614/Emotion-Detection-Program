@@ -44,8 +44,8 @@ These are the steps we broke down the process into:
 ## Action Units  
 An Action Unit is a measure of the facial muscle movements defined by the Facial Action Coding System (FACS). We take the data from the action units to see what emotion is displayed. For example, happiness is represented by raised cheeks and a pulled corner lip (6+12). 
 ![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/bf387529-dc32-472d-895a-9257a0826d3c)
+[Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
 
-[Faccial Action](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/) 
 [other](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/)
 [Ekman](https://www.paulekman.com/)
 
