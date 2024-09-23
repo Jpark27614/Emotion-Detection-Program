@@ -62,5 +62,7 @@ For our research on Action units websites and articles were very useful. A good 
 **Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
 ## Application 
- 
+Initial Ideas:
+* Aid for people with disabilities regarding emotional awareness
+
 
