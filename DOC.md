@@ -86,23 +86,39 @@ csv_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS\example_
 
 
 
-# Read the CSV file into a DataFrame
+# Read the CSV file into a DataFrame (table format)
 df = pd.read_csv(csv_file)
 
 # Clean column names by removing leading/trailing spaces
 df.columns = df.columns.str.strip()
 
-
-
 # Set your thresholds for each AU
 thresholds = {
     'Happiness': (0.5, 0.5),  # AU01_r, AU06_r
-    'Sadness': (0.5, 0.5),    # AU01_r, AU04_r
+    'Sadness': (0.5, 0.5),    # AU01_r, AU04_r, AU015_r
     'Anger': (0.5, 0.5, 0.5),  # AU04_r, AU07_r, AU05_r
     'Surprise': (0.5, 0.5),    # AU05_r, AU26_r
     'Fear': (0.5, 0.5, 0.5),   # AU01_r, AU02_r, AU05_r
     'Neutral': (0.2, 0.2)       # All AUs below this threshold
 }
+
+# Function to group consecutive frames into time intervals
+def get_time_intervals(times, threshold=1/fps):
+    """Group consecutive times into intervals based on a threshold for time difference."""
+    if not times:
+        return []
+    
+    times = sorted([float(t) for t in times])  # Convert times to float and sort them
+    intervals = []
+    start_time = times[0]
+
+    for i in range(1, len(times)):
+        if times[i] - times[i - 1] > threshold:  # Check if gap between times exceeds threshold
+            intervals.append((start_time, times[i - 1]))  # Create a new interval
+            start_time = times[i]
+    
+    intervals.append((start_time, times[-1]))  # Append the last interval
+    return intervals
 
 # Function to detect emotions
 def detect_emotions_in_seconds(df, fps):
@@ -142,15 +158,18 @@ def detect_emotions_in_seconds(df, fps):
             row['AU26_r'] < thresholds['Neutral'][0]):
             results['Neutral'].append(time_in_seconds)
 
-    return results
+    # Convert the results into intervals of consecutive frames in seconds
+    interval_results = {emotion: get_time_intervals(times) for emotion, times in results.items()}
+    
+    return interval_results
 
-# Detect emotions in the video
-emotion_results_in_seconds = detect_emotions_in_seconds(df, fps)
+# Detect emotions and group them into time intervals
+emotion_intervals = detect_emotions_in_seconds(df, fps)
 
 # Print the results
-for emotion, times in emotion_results_in_seconds.items():
-    if times:
-        print(f"{emotion} detected at seconds: {times}")
+for emotion, intervals in emotion_intervals.items():
+    if intervals:
+        print(f"{emotion} detected at intervals: {intervals}")
     else:
         print(f"No {emotion} detected.")
 ```
