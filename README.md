@@ -65,6 +65,9 @@ For our research on Action units websites and articles were very useful. A good 
 **Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
 ## Application 
+
+We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-uses-for-emotion-ai-technology) to help us think of ideas for application. 
+
 #### Brainstorm:
 * Aid for people with disabilities regarding emotional awareness
 * Detect deception/fabricated expressions. See types of facial expressions by Paul Eckman Group: https://www.paulekman.com/nonverbal-communication/types-of-facial-expressions/
