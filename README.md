@@ -64,5 +64,6 @@ For our research on Action units websites and articles were very useful. A good 
 ## Application 
 Initial Ideas:
 * Aid for people with disabilities regarding emotional awareness
+* deception 
 
 
