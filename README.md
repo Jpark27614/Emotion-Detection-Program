@@ -62,8 +62,9 @@ For our research on Action units websites and articles were very useful. A good 
 **Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
 ## Application 
-Initial Ideas:
+#### Brainstorm:
 * Aid for people with disabilities regarding emotional awareness
-* deception 
+* Detect deception/fabricated expressions. See types of facial expressions by Paul Eckman Group: https://www.paulekman.com/nonverbal-communication/types-of-facial-expressions/
+* 
 
 
