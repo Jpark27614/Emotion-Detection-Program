@@ -11,7 +11,7 @@ EMODE is an application focused on emotion detectionan using the OpenFace deep l
 (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
 
 
-``` ruby
+``` python
 import subprocess
 import os
 import csv
