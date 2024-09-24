@@ -8,7 +8,8 @@ EMODE is an application focused on emotion detectionan using the OpenFace deep l
 - Start using OpenFace on VSCode
 -----
 
-(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
+In order to effectively manipulate the OpenFace data, couple of libraries were installed. These included ```cv2``` and ```pandas```.  ```cv2``` is part of the OpenCV library, which o used for computer vision tasks. It provides tools for image and video processing, including functions for image manipulation, feature detection, and object recognition. The ```pandas``` library, imported as ```pd```, is s powerful data manipulation and analysis library that provides data structures like DataFrames. DataFrames are two-dimensional, size-mutable, and potentially heterogeneous tabular data structure that are very helpful for machine learning tasks due to their versatility and user-friendly nature. The ```pandas``` library is widely used for data cleaning, transformation, and analysis, making it easier to work with structured data.
+
 
 
 ``` python
