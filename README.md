@@ -72,5 +72,4 @@ We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-
 * Aid for people with disabilities regarding emotional awareness
 * Detect deception/fabricated expressions. See types of facial expressions by Paul Eckman Group: https://www.paulekman.com/nonverbal-communication/types-of-facial-expressions/
 * See how different products and adds spark emotions [website](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
-
-
+* Medical diagnosis (Ex. Depression, dementia, ADHD...) 
