@@ -1,36 +1,5 @@
-
-## Week of 9/9/24
-### Goals
-- Instal OpenFace on Windows
-- Test installation using command lines
-- Start documentation of research on GitHub
------
-#### OpenFace Installation
-Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
-Note that videos must be in mp4 format to run through OpenFace application. The following command lines were used to run sequence analysis (locate facial points) on a video with one person (command line argument: ```FaceLandmarkVid```): 
-
-``` ruby
-# Locate OpenFace Directory
-cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
-
-# Places landmarks on the video for Facial Recognition (FR) 
-.\FaceLandmarkVid.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
-
-```
-
-This resulted in an avi file with the designed FR points, and a large data table (csv file). 
-
-https://github.com/user-attachments/assets/06a0686e-6d9e-4fc9-a614-468a45c967a4
-
-An additional test was performed using multiple faces. The following command line was implented: 
-
-```ruby
-# Places landmarks on the video for multiple faces
-.\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
-```
-
-https://github.com/user-attachments/assets/33e166a9-8f0f-49f1-82b5-e32fe2e96587
-
+# Abstract
+EMODE is an application focused on emotion detectionan using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EMODE parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
 
 ## Week of 9/16/24
 ### Goals
@@ -175,3 +144,36 @@ for emotion, intervals in emotion_intervals.items():
 ```
 
 Coding on VSCode with OpenFace was easier than expected, as the process was similar to using command lines on PowerShell. As we look forward and begin to brainstorm ideas for the application of this emotion detection program, it is important to note that data collection and analysis is key to determine the accuracy of this model. We have created a preliminary map of action units to emotions available in the README at: [Action Units to Emotions](https://github.com/Jpark27614/Emotion-Detection-Program/blob/main/README.md#action-unit-combinations-and-emotions).  To change the results of the model, the combinations of action units can be changed. In addition, the thresholds for every active unit to be "active" can be easily changed. With additional research, we can determine which AUs are more important than others in order to get an accurate detection. 
+
+
+## Week of 9/9/24
+### Goals
+- Instal OpenFace on Windows
+- Test installation using command lines
+- Start documentation of research on GitHub
+-----
+#### OpenFace Installation
+Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
+Note that videos must be in mp4 format to run through OpenFace application. The following command lines were used to run sequence analysis (locate facial points) on a video with one person (command line argument: ```FaceLandmarkVid```): 
+
+``` ruby
+# Locate OpenFace Directory
+cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
+
+# Places landmarks on the video for Facial Recognition (FR) 
+.\FaceLandmarkVid.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
+
+```
+
+This resulted in an avi file with the designed FR points, and a large data table (csv file). 
+
+https://github.com/user-attachments/assets/06a0686e-6d9e-4fc9-a614-468a45c967a4
+
+An additional test was performed using multiple faces. The following command line was implented: 
+
+```ruby
+# Places landmarks on the video for multiple faces
+.\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
+```
+
+https://github.com/user-attachments/assets/33e166a9-8f0f-49f1-82b5-e32fe2e96587
