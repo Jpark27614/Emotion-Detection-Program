@@ -64,32 +64,32 @@ df.columns = df.columns.str.strip()
 
 # Set your thresholds for each AU
 thresholds = {
-    'Happiness': (0.5, 0.5),  # AU01_r, AU06_r
-    'Sadness': (0.5, 0.5),    # AU01_r, AU04_r, AU015_r
-    'Anger': (0.5, 0.5, 0.5),  # AU04_r, AU07_r, AU05_r
-    'Surprise': (0.5, 0.5),    # AU05_r, AU26_r
-    'Fear': (0.5, 0.5, 0.5),   # AU01_r, AU02_r, AU05_r
+    'Happiness': (0.5, 0.5),  # AU06_r, AU012_r
+    'Sadness': (0.5, 0.5, 0.5),    # AU01_r, AU04_r, AU015_r
+    'Anger': (0.5, 0.5, 0.5, 0.5),  # AU04_r, AU07_r, AU05_r, AU23_r
+    'Surprise': (0.5, 0.5, 0.5, 0.5),    # AU01_r, AU02_r, AU05_r, AU26_r
+    'Fear': (0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5),   # AU01_r, AU02_r, AU04_r, AU05_r, AU07_r, AU20_r, AU26_r
+    'Disgust': (0.5, 0.5, 0.5),     # AU09_r, AU15_r
     'Neutral': (0.2, 0.2)       # All AUs below this threshold
 }
 
 # Function to group consecutive frames into time intervals
-def get_time_intervals(times, threshold=1/fps):
-    """Group consecutive times into intervals based on a threshold for time difference."""
+def get_time_intervals(times, threshold=0.5):
     if not times:
         return []
-    
-    times = sorted([float(t) for t in times])  # Convert times to float and sort them
-    intervals = []
-    start_time = times[0]
 
-    for i in range(1, len(times)):
-        if times[i] - times[i - 1] > threshold:  # Check if gap between times exceeds threshold
-            intervals.append((start_time, times[i - 1]))  # Create a new interval
-            start_time = times[i]
-    
+    times = sorted(float(t) for t in times)
+    intervals, start_time = [], times[0]
+
+    for current_time in times[1:]:
+        if current_time - start_time > threshold:
+            intervals.append((start_time, times[times.index(current_time) - 1]))
+            start_time = current_time
+
     intervals.append((start_time, times[-1]))  # Append the last interval
     return intervals
 
+    
 # Function to detect emotions
 def detect_emotions_in_seconds(df, fps):
     results = {emotion: [] for emotion in thresholds.keys()}
@@ -99,24 +99,28 @@ def detect_emotions_in_seconds(df, fps):
         time_in_seconds = row['timestamp']
 
         # Check for happiness
-        if row['AU01_r'] > thresholds['Happiness'][0] and row['AU06_r'] > thresholds['Happiness'][1]:
+        if row['AU06_r'] > thresholds['Happiness'][0] and row['AU12_r'] > thresholds['Happiness'][1]:
             results['Happiness'].append(time_in_seconds)
 
         # Check for sadness
-        if row['AU01_r'] > thresholds['Sadness'][0] and row['AU04_r'] > thresholds['Sadness'][1]:
+        if row['AU01_r'] > thresholds['Sadness'][0] and row['AU04_r'] > thresholds['Sadness'][1] and row['AU15_r'] > thresholds['Sadness'][2]:
             results['Sadness'].append(time_in_seconds)
 
         # Check for anger
-        if row['AU04_r'] > thresholds['Anger'][0] and row['AU07_r'] > thresholds['Anger'][1] and row['AU05_r'] > thresholds['Anger'][2]:
+        if row['AU04_r'] > thresholds['Anger'][0] and row['AU07_r'] > thresholds['Anger'][1] and row['AU05_r'] > thresholds['Anger'][2] and row['AU23_r'] > thresholds['Anger'][3]:
             results['Anger'].append(time_in_seconds)
 
         # Check for surprise
-        if row['AU05_r'] > thresholds['Surprise'][0] and row['AU26_r'] > thresholds['Surprise'][1]:
+        if row['AU01_r'] > thresholds['Surprise'][0] and row['AU02_r'] > thresholds['Surprise'][1] and row['AU05_r'] > thresholds['Surprise'][2] and row['AU26_r'] > thresholds['Surprise'][3]:
             results['Surprise'].append(time_in_seconds)
 
         # Check for fear
-        if row['AU01_r'] > thresholds['Fear'][0] and row['AU02_r'] > thresholds['Fear'][1] and row['AU05_r'] > thresholds['Fear'][2]:
+        if row['AU01_r'] > thresholds['Fear'][0] and row['AU02_r'] > thresholds['Fear'][1] and row['AU04_r'] > thresholds['Fear'][2] and row['AU05_r'] > thresholds['Fear'][3] and row['AU07_r'] > thresholds['Fear'][4] and row['AU20_r'] > thresholds['Fear'][5] and row['AU26_r'] > thresholds['Fear'][6]:
             results['Fear'].append(time_in_seconds)
+        
+        # Check for disgust
+        if row['AU09_r'] > thresholds['Disgust'][0] and row['AU15_r'] > thresholds['Disgust'][1]:
+            results['Disgust'].append(time_in_seconds)
 
         # Check for neutral (if all AUs are below the neutral threshold)
         if (row['AU01_r'] < thresholds['Neutral'][0] and
@@ -125,6 +129,11 @@ def detect_emotions_in_seconds(df, fps):
             row['AU05_r'] < thresholds['Neutral'][0] and
             row['AU06_r'] < thresholds['Neutral'][0] and
             row['AU07_r'] < thresholds['Neutral'][0] and
+            row['AU09_r'] < thresholds['Neutral'][0] and
+            row['AU12_r'] < thresholds['Neutral'][0] and
+            row['AU15_r'] < thresholds['Neutral'][0] and
+            row['AU20_r'] < thresholds['Neutral'][0] and
+            row['AU23_r'] < thresholds['Neutral'][0] and
             row['AU26_r'] < thresholds['Neutral'][0]):
             results['Neutral'].append(time_in_seconds)
 
