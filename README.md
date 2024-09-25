@@ -55,7 +55,7 @@ For our research on Action units websites and articles were very useful. A good 
 
 **Happiness:** 6* + 12 (Cheek Raiser + Lip Corner Pull) 
 
-**Sadness:** 1* + 4 + 15* (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor 
+**Sadness:** 1* + 4 + 15* (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor)
 
 **Suprise:** 1 + 2 + 5 + 26 (Inner Brow Raiser + Outer Brow Raiser + Upper Lid Raiser + Jaw Drop)
 
