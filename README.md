@@ -3,6 +3,7 @@
 ## Table of Contents
 * [Schedule](#Schedule)
 * [Research](#Research)
+* [Action Units](Action_Units)
 * [Application](#Application) 
 
 ## Schedule 
@@ -41,7 +42,7 @@ These are the steps we broke down the process into:
 
   * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
 
-## Action Units  
+## Action_Units  
 An Action Unit is a measure of the facial muscle movements defined by the Facial Action Coding System (FACS). We take the data from the action units to see what emotion is displayed. For example, happiness is represented by raised cheeks and a pulled corner lip (6+12). 
 
 ![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/8758da33-ee0e-4b29-94b2-0c7a45a55be4) [Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/)
