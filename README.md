@@ -51,7 +51,7 @@ For our research on Action units websites and articles were very useful. A good 
 
 ### Action Unit Combinations and Emotions
 
-*= Hardest Action units to fake 
+*Hardest Action units to fake
 
 **Happiness:** 6* + 12 (Cheek Raiser + Lip Corner Pull) 
 
