@@ -51,16 +51,17 @@ For our research on Action units websites and articles were very useful. A good 
 
 ### Action Unit Combinations and Emotions
 
+* Hardest Action units to fake 
 
-**Happiness:** 6 + 12 (Cheek Raiser + Lip Corner Pull) 
+**Happiness:** 6* + 12 (Cheek Raiser + Lip Corner Pull) 
 
-**Sadness:** 1 + 4 + 15 (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor 
+**Sadness:** 1* + 4 + 15* (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor 
 
 **Suprise:** 1 + 2 + 5 + 26 (Inner Brow Raiser + Outer Brow Raiser + Upper Lid Raiser + Jaw Drop)
 
-**Fear:** 1 + 2 + 4 + 5 + 7 + 20 + 26 (Inner Brow Raiser + Outer Brow Raiser + Brow Lowerer + Upper Lid Raiser + Tightener + Lip Strecher + Jaw Drop) 
+**Fear:** 1* + 2* + 4* + 5 + 7 + 20 + 26 (Inner Brow Raiser + Outer Brow Raiser + Brow Lowerer + Upper Lid Raiser + Tightener + Lip Strecher + Jaw Drop) 
 
-**Anger:** 4 + 5 + 7 + 23 (Brow Lowerer + Upper Lid Raiser + Lid Tightener + Lip Tightener) 
+**Anger:** 4 + 5 + 7 + 23* (Brow Lowerer + Upper Lid Raiser + Lid Tightener + Lip Tightener) 
 
 **Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
