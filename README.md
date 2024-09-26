@@ -75,4 +75,7 @@ We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-
 * Detect deception/fabricated expressions. See types of facial expressions by Paul Eckman Group: https://www.paulekman.com/nonverbal-communication/types-of-facial-expressions/
 * See how different products and adds spark emotions [website](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
 * Medical diagnosis (Ex. Depression, dementia, ADHD...)
-* Video Games (game reacts to expression and changes based on it) 
+* Video Games (game reacts to expression and changes based on it)
+
+## Webcam
+To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
