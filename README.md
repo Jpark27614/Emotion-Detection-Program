@@ -76,6 +76,7 @@ We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-
 * See how different products and adds spark emotions [website](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
 * Medical diagnosis (Ex. Depression, dementia, ADHD...)
 * Video Games (game reacts to expression and changes based on it)
+* See what responses or questions evoke an emotional response then report what makes you sad, happy, scared, etc.  
 
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
