@@ -83,7 +83,9 @@ We chose the application that asks questions to discover what people link emotio
 
 #### Example 
 Emode: Hi, how do you feel about your family matters?
+
 Human: Thanks for asking my family is great! * smiles *
+
 Emode: Detects facial features of happiness and links family to happiness. 
 
 ## Webcam
