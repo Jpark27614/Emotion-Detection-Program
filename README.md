@@ -81,5 +81,10 @@ We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-
 #### Final
 We chose the application that asks questions to discover what people link emotions with. After lots of brainstorming, we ultimately landed on this choice because we wanted something that would help people personally/with their life matters. Although the idea of video games and medical diagnosis would be awesome, the emotional questionnaire deals more with mental health which is very closely linked with emotions and creates a more practical application for emotion detection. 
 
+#### Example 
+Emode: Hi, how do you feel about your family matters?
+Human: Thanks for asking my family is great! * smiles *
+Emode: Detects facial features of happiness and links family to happiness. 
+
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
