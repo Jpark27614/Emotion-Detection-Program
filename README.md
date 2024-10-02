@@ -90,3 +90,6 @@ Emode: Detects facial features of happiness and links family to happiness.
 
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
+
+First, we ran an OpenFace command with the webcam as a video input then stored the output to test.csv
+We then uploaded the test.csv to a While True which sends it to the AU script, this makes it so it always checks for updates in the csv. 
