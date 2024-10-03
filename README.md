@@ -4,7 +4,9 @@
 * [Schedule](#Schedule)
 * [Research](#Research)
 * [Action Units](#Action_Units)
-* [Application](#Application) 
+* [Application](#Application)
+* [Webcam](#Webcam)
+* [Questionaire](#Questionaire)
 
 ## Schedule 
 
@@ -103,8 +105,11 @@ We then uploaded the test.csv to a While True which sends it to the AU script, t
 * Friends
 * Self reflection
 
-#### Humanistic therapy 
-
-(active listening; reflection; values and goals; gestalt techniques; empathy)
-  
-1. 
+### Humanistic Therapy 
+Our program will utlizie a humanistic therapitic approach. Humanistic therapy utilizes various techniques aimed at fostering self-exploration, personal growth, and emotional well-being. It aims for self-actualization and realization of self-worth through flexibile and tailored techniques. Some of the techniques include: 
+1. Active listening and empathy
+* Creates a safe and supportive environment -- open ended questions
+2. Gestalt techniques
+* Helps clients become more aware of their thoughts, feelings, and actions in the present moment -- personal responsibility and self-awareness
+3. Mindfulness and Meditation
+* Incorporates mindfulness practices to improve relationship with self and decrease anxiety
