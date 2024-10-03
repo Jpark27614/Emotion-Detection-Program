@@ -77,7 +77,7 @@ We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-
 * Medical diagnosis (Ex. Depression, dementia, ADHD...)
 * Video Games (game reacts to expression and changes based on it)
 * **See what responses or questions evoke an emotional response then report what makes you sad, happy, scared, etc.]**
-  * another version of this idea could be used without a webcam. In place of live video the survey of questions could require a video recording response which would serve as the input for the facial recognition
+  *Another version of this idea could be used without a webcam. In place of a live video, the survey of questions could require a video recording response which would serve as the input for the facial recognition 
 
 #### Final
 We chose the application that asks questions to discover what people link emotions with. After lots of brainstorming, we ultimately landed on this choice because we wanted something that would help people personally/with their life matters. Although the idea of video games and medical diagnosis would be awesome, the emotional questionnaire deals more with mental health which is very closely linked with emotions and creates a more practical application for emotion detection. 
