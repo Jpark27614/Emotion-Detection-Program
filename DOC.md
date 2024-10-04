@@ -1,287 +1,117 @@
-# Abstract
-EMODE is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EMODE parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
-## Week of 9/30/24
-### Goals 
-1. Finalize application of emotion detection program
-2. Pipe the OpenFace output to the VSCode script using webcam as input
-------
-#### Application Description
-The program will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. It has not yet been determined if the program will simply create a report of what topics make the user react, or will also give advice/solutions.
-#### Webcam with OpenFace
-While the logic for this process is fairly simple, it proved to be much more difficult than initally expected. In order to use the webcam as input to get real-time emotion detection, the following steps were taken:
-1) Run the OpenFace command using the webcam as video input and store the output to test.csv.
-2) Open test.csv in AU script using an infinite loop (while True) , so it is always checking the csv file for updates.
+# Emotion-Detection-Program
 
-   
-The UVA Link Lab advisor for the project, Haley Green, provided the following pusedocode for this AU infinite loop:
-```python
-import time
-import csv
+## Table of Contents
+* [Schedule](#Schedule)
+* [Research](#Research)
+* [Action Units](#Action_Units)
+* [Application](#Application)
+* [Webcam](#Webcam)
+* [Questionaire](#Questionaire)
 
-def follow_csv(filename):
-    # Open the CSV file in read mode
-    with open(filename, 'r') as file:
-        # Move the pointer to the end of the file to read only new lines
-        file.seek(0, 2)
-        
-        while True:
-            # Read the new line
-            new_line = file.readline()
-            
-            if new_line:
-                # Convert the line into a CSV row (useful if there are commas, etc.)
-                reader = csv.reader([new_line])
-                for row in reader:
-                    # Print the new row
-                    print(row)
-            else:
-                # Sleep briefly before checking again (to avoid high CPU usage)
-                time.sleep(0.5)
+## Schedule 
 
-# Replace 'your_file.csv' with the path to your actively updating CSV file
-follow_csv('/home/haleygreen/OpenFace/build/processed/test.csv')
-```
+* Finish brainstorm and research- Weeks 3-4
+* Research, install OpenFace, and test- Weeks 4-5
+* Develop and finalize our application for emotion detection- Weeks 5-7
+* Test and create code for the application and response- Weeks 7-15
+* Document- Weeks 4-17
 
-However, this script did not produce any output when run. After troubleshooting both the webcam and OpenFace, it was determined this issue lied in the computer itself. The webcam was effectively opened using a simple code, and OpenFace worked correctly as shown in previous weeks. Futhermore, the following command line was used to streamline the input/output on Powershell: 
-```& "C:\Users\cchao2869\Desktop\OpenFace\FaceLandmarkVid.exe" -f 0 -out_dir "C:\Users\cchao2869\Documents\openfaceApp\output"```
-
-This returned an error message that the webcam could not be found at index 0. However, the webcam could not be found at indexes 1, 2, ... either. Due to a variety of administrative locks on the desktop computers, it can be inferred that the administrative locks do not allow the user to continuously create and write a file in a new directory. The simple script that uses the webcam with OpenFace will be run on a personal computer to remove this source of error. 
-
-```python
-import time
-import csv
-import os
-
-def follow_csv(filename):
-    # Check if the file exists
-    if not os.path.exists(filename):
-        print(f"Error: File {filename} does not exist.")
-        return
+## Research 
+Our first step was to comprehend the steps and process of facial recognition. We used the website [Medium.com](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d) to break down the process of facial recognition into manageable chunks. 
+These are the steps we broke down the process into:
+### 1. Data Collection and Prep
+  * **Dataset:** A collection of photos assigned with different emotions to train the model on what the emotions look like.
     
-    # Open the CSV file in read mode
-    with open(filename, 'r') as file:
-        # Move the pointer to the end of the file to read only new lines
-        file.seek(0, 2)
-        
-        while True:
-            try:
-                # Read the new line
-                new_line = file.readline()
-                
-                if new_line:
-                    # Convert the line into a CSV row (useful if there are commas, etc.)
-                    reader = csv.reader([new_line])
-                    for row in reader:
-                        # Print the new row (or process it)
-                        print(row)
-                else:
-                    # Sleep briefly before checking again (to avoid high CPU usage)
-                    time.sleep(0.5)
-            except Exception as e:
-                print(f"An error occurred: {e}")
-                time.sleep(1)  # Wait a moment before trying again
+    ![Variety-Facial-Emotion-Recognition-32-Data-Storage-The-dataset-used-in-this-research-is](https://github.com/user-attachments/assets/5415e327-81e1-4a14-8db0-6d4e9b958236)
 
-# Replace 'your_file.csv' with the path to your actively updating CSV file
-follow_csv(r'C:\Users\cchao2869\Documents\openfaceApp\test.csv')  # Adjust path as needed
-```
+  * **Preprocessing:** The process of resizing, scaling pixels, and augmentation for diversity (diverse images broaden capabilities of emotion detection so it detects more than a certain group of people Ex. All male images = only accurate for males)
 
-Also note that use of the webcam creates several more variables to adjust, including the amount of delay/frames run through the OpenFace model in order to optimize accuracy and speed of results. Once the program can effectively detect emotions using the webcam, the following variables will be considered to optimize performance with the application in mind:
+![Screenshot 2024-09-10 132717](https://github.com/user-attachments/assets/8af09870-8e4b-4e6a-94a4-5fb886f86f63)
 
-- Use of AU intesity and binary data in unison
-- Threshold of AU intensity data
-- Delay in loop for webcam lag
-- AUs for each emotion
-- Amount of time each emotion is displayed
-- Delay in emotional response after question is posed
+### 2. Model Building and Training 
+  * We're planning to use [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/blob/master/README.md) for the base of our emotion detection model.
+    * We then [installed](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation) OpenFace with the help of a [tutorial](https://www.youtube.com/watch?v=qknAAax8aCo).
+  * **Training:** The process of feeding the model validated images to learn what different emotions look like. 
 
+### 3. Video Detection 
+  * **Preprocessing:** Extracting frames to analyze and process each frame to detect the emotion.
+  * **Real-Time Detection:** Using frames from a webcam to process real-time emotions.
 
-## Week of 9/16/24
-### Goals
-1. Start using OpenFace on VSCode
-2. Research action units (AU) and define emotions based on AU
-3. Brainstorm applications of emotion recognition
+### 4. Evaluation and Detection 
+  * **Model Evaluation:** Test and analyze the accuracy of the model, as well as the confusion matrix.
+    * **Confusion Matrix:** A table layout used to visualize the performance of an algorithm. Each row of the matrix represents the instances in an actual class, and each column represents all instances that are correctly predicted. 
+![Screenshot 2024-09-12 134119](https://github.com/user-attachments/assets/578fd0cc-0b9d-4889-bdbb-b7707920ad60)[Image](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d)
 
------
+  * **Deployment:** How do we send this program out to the world? Ex. App, website, concept...
 
+## Action_Units  
+An Action Unit is a measure of the facial muscle movements defined by the Facial Action Coding System (FACS). We take the data from the action units to see what emotion is displayed. For example, happiness is represented by raised cheeks and a pulled corner lip (6+12). 
 
+![Screenshot 2024-09-19 140930](https://github.com/user-attachments/assets/8758da33-ee0e-4b29-94b2-0c7a45a55be4) [Image](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/)
 
-#### OpenFace on VSCode
-In order to effectively manipulate the OpenFace data, couple of libraries were installed. These included ```cv2``` and ```pandas```.  ```cv2``` is part of the OpenCV library, which o used for computer vision tasks. It provides tools for image and video processing, including functions for image manipulation, feature detection, and object recognition. The ```pandas``` library, imported as ```pd```, is s powerful data manipulation and analysis library that provides data structures like DataFrames. DataFrames are two-dimensional, size-mutable, and potentially heterogeneous tabular data structure that are very helpful for machine learning tasks due to their versatility and user-friendly nature. The ```pandas``` library is widely used for data cleaning, transformation, and analysis, making it easier to work with structured data.
+For our research on Action units websites and articles were very useful. A good source for understanding what AU is on [Imotions](https://imotions.com/blog/learning/research-fundamentals/facial-action-coding-system/). Another website that was useful to us was [The Emotional Intelligence Agency](https://www.eiagroup.com/resources/facial-expressions/facial-action-coding-system-facs/). These sources cannot be credible without mentioning !
+[Paul Ekman](https://www.paulekman.com/). Ekman is a huge name in the field of emotion detection, he discovered that some facial expressions of emotions are universal and co-discovered micro-expressions. His research has changed how we think about emotional expression and influenced Action Units. 
 
+### Action Unit Combinations and Emotions
 
+*Hardest Action units to fake
 
-``` python
-import subprocess
-import os
-import csv
-import pandas as pd
-import cv2
+**Happiness:** 6* + 12 (Cheek Raiser + Lip Corner Pull) 
 
+**Sadness:** 1* + 4 + 15* (Inner Brow Raiser + Brow Lowerer + Lip Corner Depressor)
 
+**Suprise:** 1 + 2 + 5 + 26 (Inner Brow Raiser + Outer Brow Raiser + Upper Lid Raiser + Jaw Drop)
 
+**Fear:** 1* + 2* + 4* + 5 + 7 + 20 + 26 (Inner Brow Raiser + Outer Brow Raiser + Brow Lowerer + Upper Lid Raiser + Tightener + Lip Strecher + Jaw Drop) 
 
-# Set up paths
-openface_dir = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86'  # Update this path
-video_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video4.mp4'
-output_dir = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS'
+**Anger:** 4 + 5 + 7 + 23* (Brow Lowerer + Upper Lid Raiser + Lid Tightener + Lip Tightener) 
 
+**Disgust:** 9 + 15 + 16 (Nose Wrinkler + Lip Corner Depressor + Lower Lip Depressor)
 
-# Open the video file
-video = cv2.VideoCapture(video_file)
+## Application 
 
-# Get the FPS (Frames Per Second)
-fps = video.get(cv2.CAP_PROP_FPS)
+We used this [website](https://www.gartner.com/smarterwithgartner/13-surprising-uses-for-emotion-ai-technology) to help us think of ideas for application. 
 
-# Print the FPS value
-print(f"Frames per second (FPS): {fps}")
+#### Brainstorm:
+* Aid for people with disabilities regarding emotional awareness
+* Detect deception/fabricated expressions. See types of facial expressions by Paul Eckman Group: https://www.paulekman.com/nonverbal-communication/types-of-facial-expressions/
+* See how different products and adds spark emotions [website](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7264164/)
+* Medical diagnosis (Ex. Depression, dementia, ADHD...)
+* Video Games (game reacts to expression and changes based on it)
+* **See what responses or questions evoke an emotional response then report what makes you sad, happy, scared, etc.]**
+  * Another version of this idea could be used without a webcam. In place of a live video, the survey of questions could require a video recording response which would serve as the input for the facial recognition 
 
-# Release the video file
-video.release()
+#### Final
+We chose the application that asks questions to discover what people link emotions with. After lots of brainstorming, we ultimately landed on this choice because we wanted something that would help people personally/with their life matters. Although the idea of video games and medical diagnosis would be awesome, the emotional questionnaire deals more with mental health which is very closely linked with emotions and creates a more practical application for emotion detection. 
 
+#### Example 
+Emode: Hi, how do you feel about your family matters?
 
-# Define the command
-command = [
-    os.path.join(openface_dir, 'FeatureExtraction.exe'),  # OpenFace binary
-    '-f', video_file,  # Input video
-    '-out_dir', output_dir  # Output directory
-]
+Human: Thanks for asking my family is great! * smiles *
 
-# Run the command
-subprocess.run(command)
+Emode: Detects facial features of happiness and links family to happiness. 
 
-# Path to your CSV file
-csv_file = r'C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\outputVS\example_video4.csv'
+## Webcam
+To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
+
+First, we ran an OpenFace command with the webcam as a video input then stored the output to test.csv
+We then uploaded the test.csv to a While True which sends it to the AU script, this makes it so it always checks for updates in the csv. 
+
+## Questionare 
+
+#### Possible topics
+* Age (based on age how they emotionally respond) 
+* Family
+* Friends
+* Self reflection
+
+### Humanistic Therapy 
+Our program will utlizie a humanistic therapitic approach. Humanistic therapy utilizes various techniques aimed at fostering self-exploration, personal growth, and emotional well-being. It aims for self-actualization and realization of self-worth through flexibile and tailored techniques. Some of the techniques include: 
+1. Active listening and empathy
+* Creates a safe and supportive environment -- open ended questions
+2. Gestalt techniques
+* Helps clients become more aware of their thoughts, feelings, and actions in the present moment -- personal responsibility and self-awareness
+3. Mindfulness and Meditation
+* Incorporates mindfulness practices to improve relationship with self and decrease anxiety
 
 
-
-# Read the CSV file into a DataFrame (table format)
-df = pd.read_csv(csv_file)
-
-# Clean column names by removing leading/trailing spaces
-df.columns = df.columns.str.strip()
-
-# Set your thresholds for each AU
-thresholds = {
-    'Happiness': (0.5, 0.5),  # AU06_r, AU012_r
-    'Sadness': (0.5, 0.5, 0.5),    # AU01_r, AU04_r, AU015_r
-    'Anger': (0.5, 0.5, 0.5, 0.5),  # AU04_r, AU07_r, AU05_r, AU23_r
-    'Surprise': (0.5, 0.5, 0.5, 0.5),    # AU01_r, AU02_r, AU05_r, AU26_r
-    'Fear': (0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5),   # AU01_r, AU02_r, AU04_r, AU05_r, AU07_r, AU20_r, AU26_r
-    'Disgust': (0.5, 0.5, 0.5),     # AU09_r, AU15_r
-    'Neutral': (0.2, 0.2)       # All AUs below this threshold
-}
-
-# Function to group consecutive frames into time intervals
-def get_time_intervals(times, threshold=0.5):
-    if not times:
-        return []
-
-    times = sorted(float(t) for t in times)
-    intervals, start_time = [], times[0]
-
-    for current_time in times[1:]:
-        if current_time - start_time > threshold:
-            intervals.append((start_time, times[times.index(current_time) - 1]))
-            start_time = current_time
-
-    intervals.append((start_time, times[-1]))  # Append the last interval
-    return intervals
-
-    
-# Function to detect emotions
-def detect_emotions_in_seconds(df, fps):
-    results = {emotion: [] for emotion in thresholds.keys()}
-
-    for index, row in df.iterrows():
-        # Convert frame number to seconds 
-        time_in_seconds = row['timestamp']
-
-        # Check for happiness
-        if row['AU06_r'] > thresholds['Happiness'][0] and row['AU12_r'] > thresholds['Happiness'][1]:
-            results['Happiness'].append(time_in_seconds)
-
-        # Check for sadness
-        if row['AU01_r'] > thresholds['Sadness'][0] and row['AU04_r'] > thresholds['Sadness'][1] and row['AU15_r'] > thresholds['Sadness'][2]:
-            results['Sadness'].append(time_in_seconds)
-
-        # Check for anger
-        if row['AU04_r'] > thresholds['Anger'][0] and row['AU07_r'] > thresholds['Anger'][1] and row['AU05_r'] > thresholds['Anger'][2] and row['AU23_r'] > thresholds['Anger'][3]:
-            results['Anger'].append(time_in_seconds)
-
-        # Check for surprise
-        if row['AU01_r'] > thresholds['Surprise'][0] and row['AU02_r'] > thresholds['Surprise'][1] and row['AU05_r'] > thresholds['Surprise'][2] and row['AU26_r'] > thresholds['Surprise'][3]:
-            results['Surprise'].append(time_in_seconds)
-
-        # Check for fear
-        if row['AU01_r'] > thresholds['Fear'][0] and row['AU02_r'] > thresholds['Fear'][1] and row['AU04_r'] > thresholds['Fear'][2] and row['AU05_r'] > thresholds['Fear'][3] and row['AU07_r'] > thresholds['Fear'][4] and row['AU20_r'] > thresholds['Fear'][5] and row['AU26_r'] > thresholds['Fear'][6]:
-            results['Fear'].append(time_in_seconds)
-        
-        # Check for disgust
-        if row['AU09_r'] > thresholds['Disgust'][0] and row['AU15_r'] > thresholds['Disgust'][1]:
-            results['Disgust'].append(time_in_seconds)
-
-        # Check for neutral (if all AUs are below the neutral threshold)
-        if (row['AU01_r'] < thresholds['Neutral'][0] and
-            row['AU02_r'] < thresholds['Neutral'][0] and
-            row['AU04_r'] < thresholds['Neutral'][0] and
-            row['AU05_r'] < thresholds['Neutral'][0] and
-            row['AU06_r'] < thresholds['Neutral'][0] and
-            row['AU07_r'] < thresholds['Neutral'][0] and
-            row['AU09_r'] < thresholds['Neutral'][0] and
-            row['AU12_r'] < thresholds['Neutral'][0] and
-            row['AU15_r'] < thresholds['Neutral'][0] and
-            row['AU20_r'] < thresholds['Neutral'][0] and
-            row['AU23_r'] < thresholds['Neutral'][0] and
-            row['AU26_r'] < thresholds['Neutral'][0]):
-            results['Neutral'].append(time_in_seconds)
-
-    # Convert the results into intervals of consecutive frames in seconds
-    interval_results = {emotion: get_time_intervals(times) for emotion, times in results.items()}
-    
-    return interval_results
-
-# Detect emotions and group them into time intervals
-emotion_intervals = detect_emotions_in_seconds(df, fps)
-
-# Print the results
-for emotion, intervals in emotion_intervals.items():
-    if intervals:
-        print(f"{emotion} detected at intervals: {intervals}")
-    else:
-        print(f"No {emotion} detected.")
-```
-
-Coding on VSCode with OpenFace was easier than expected, as the process was similar to using command lines on PowerShell. As we look forward and begin to brainstorm ideas for the application of this emotion detection program, it is important to note that data collection and analysis is key to determine the accuracy of this model. We have created a preliminary map of action units to emotions available in the README at: [Action Units to Emotions](https://github.com/Jpark27614/Emotion-Detection-Program/blob/main/README.md#action-unit-combinations-and-emotions).  To change the results of the model, the combinations of action units can be changed. In addition, the thresholds for every active unit to be "active" can be easily changed. With additional research, we can determine which AUs are more important than others in order to get an accurate detection. 
-
-
-## Week of 9/9/24
-### Goals
-1. Instal OpenFace on Windows
-2. Test installation using command lines
-3. Start documentation of research on GitHub
------
-#### OpenFace Installation
-Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
-Note that videos must be in mp4 format to run through OpenFace application. The following command lines were used to run sequence analysis (locate facial points) on a video with one person (command line argument: ```FaceLandmarkVid```): 
-
-``` ruby
-# Locate OpenFace Directory
-cd "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86"
-
-# Places landmarks on the video for Facial Recognition (FR) 
-.\FaceLandmarkVid.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
-
-```
-
-This resulted in an avi file with the designed FR points, and a large data table (csv file). 
-
-https://github.com/user-attachments/assets/06a0686e-6d9e-4fc9-a614-468a45c967a4
-
-An additional test was performed using multiple faces. The following command line was implented: 
-
-```ruby
-# Places landmarks on the video for multiple faces
-.\FaceLandmarkVidMulti.exe -f "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\OpenFace_2.2.0_win_x86\example_video3.mp4" -out_dir "C:\Users\cchao2869\Desktop\OpenFace_2.2.0_win_x86\output"
-```
-
-https://github.com/user-attachments/assets/33e166a9-8f0f-49f1-82b5-e32fe2e96587
