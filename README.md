@@ -3,6 +3,9 @@
 ## Abstract
 EmoDe is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EmoDe parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
 
+## Goal
+EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
+
 ------
 
 ## Week of 9/30/24
