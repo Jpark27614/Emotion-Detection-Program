@@ -1,4 +1,4 @@
-# Emotion-Detection-Program
+# EMODE: Engineering Notebook
 
 ## Table of Contents
 * [Schedule](#Schedule)
