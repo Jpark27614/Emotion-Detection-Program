@@ -1,15 +1,109 @@
 # Abstract
 EMODE is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EMODE parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
+## Week of 9/30/24
+### Goals 
+1. Finalize application of emotion detection program
+2. Pipe the OpenFace output to the VSCode script using webcam as input
+------
+#### Application Description
+The program will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. It has not yet been determined if the program will simply create a report of what topics make the user react, or will also give advice/solutions.
+#### Webcam with OpenFace
+While the logic for this process is fairly simple, it proved to be much more difficult than initally expected. In order to use the webcam as input to get real-time emotion detection, the following steps were taken:
+1) Run the OpenFace command using the webcam as video input and store the output to test.csv.
+2) Open test.csv in AU script using an infinite loop (while True) , so it is always checking the csv file for updates.
+
+   
+The UVA Link Lab advisor for the project, Haley Green, provided the following pusedocode for this AU infinite loop:
+```python
+import time
+import csv
+
+def follow_csv(filename):
+    # Open the CSV file in read mode
+    with open(filename, 'r') as file:
+        # Move the pointer to the end of the file to read only new lines
+        file.seek(0, 2)
+        
+        while True:
+            # Read the new line
+            new_line = file.readline()
+            
+            if new_line:
+                # Convert the line into a CSV row (useful if there are commas, etc.)
+                reader = csv.reader([new_line])
+                for row in reader:
+                    # Print the new row
+                    print(row)
+            else:
+                # Sleep briefly before checking again (to avoid high CPU usage)
+                time.sleep(0.5)
+
+# Replace 'your_file.csv' with the path to your actively updating CSV file
+follow_csv('/home/haleygreen/OpenFace/build/processed/test.csv')
+```
+
+However, this script did not produce any output when run. After troubleshooting both the webcam and OpenFace, it was determined this issue lied in the computer itself. The webcam was effectively opened using a simple code, and OpenFace worked correctly as shown in previous weeks. Futhermore, the following command line was used to streamline the input/output on Powershell: 
+```& "C:\Users\cchao2869\Desktop\OpenFace\FaceLandmarkVid.exe" -f 0 -out_dir "C:\Users\cchao2869\Documents\openfaceApp\output"```
+
+This returned an error message that the webcam could not be found at index 0. However, the webcam could not be found at indexes 1, 2, ... either. Due to a variety of administrative locks on the desktop computers, it can be inferred that the administrative locks do not allow the user to continuously create and write a file in a new directory. The simple script that uses the webcam with OpenFace will be run on a personal computer to remove this source of error. 
+
+```python
+import time
+import csv
+import os
+
+def follow_csv(filename):
+    # Check if the file exists
+    if not os.path.exists(filename):
+        print(f"Error: File {filename} does not exist.")
+        return
+    
+    # Open the CSV file in read mode
+    with open(filename, 'r') as file:
+        # Move the pointer to the end of the file to read only new lines
+        file.seek(0, 2)
+        
+        while True:
+            try:
+                # Read the new line
+                new_line = file.readline()
+                
+                if new_line:
+                    # Convert the line into a CSV row (useful if there are commas, etc.)
+                    reader = csv.reader([new_line])
+                    for row in reader:
+                        # Print the new row (or process it)
+                        print(row)
+                else:
+                    # Sleep briefly before checking again (to avoid high CPU usage)
+                    time.sleep(0.5)
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                time.sleep(1)  # Wait a moment before trying again
+
+# Replace 'your_file.csv' with the path to your actively updating CSV file
+follow_csv(r'C:\Users\cchao2869\Documents\openfaceApp\test.csv')  # Adjust path as needed
+```
+
+Also note that use of the webcam creates several more variables to adjust, including the amount of delay/frames run through the OpenFace model in order to optimize accuracy and speed of results. Once the program can effectively detect emotions using the webcam, the following variables will be considered to optimize performance with the application in mind:
+
+- Use of AU intesity and binary data in unison
+- Threshold of AU intensity data
+- Delay in loop for webcam lag
+- AUs for each emotion
+- Amount of time each emotion is displayed
+- Delay in emotional response after question is posed
+
 
 ## Week of 9/16/24
 ### Goals
-- Research action units (AU) and define emotions based on AU
-- Brainstorm applications of emotion recognition
-- Start using OpenFace on VSCode
+1. Start using OpenFace on VSCode
+2. Research action units (AU) and define emotions based on AU
+3. Brainstorm applications of emotion recognition
+
 -----
 
-#### Application Description
-The program will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. It has not yet been determined if the program will simply create a report of what topics make the user react, or will also give advice/solutions.
+
 
 #### OpenFace on VSCode
 In order to effectively manipulate the OpenFace data, couple of libraries were installed. These included ```cv2``` and ```pandas```.  ```cv2``` is part of the OpenCV library, which o used for computer vision tasks. It provides tools for image and video processing, including functions for image manipulation, feature detection, and object recognition. The ```pandas``` library, imported as ```pd```, is s powerful data manipulation and analysis library that provides data structures like DataFrames. DataFrames are two-dimensional, size-mutable, and potentially heterogeneous tabular data structure that are very helpful for machine learning tasks due to their versatility and user-friendly nature. The ```pandas``` library is widely used for data cleaning, transformation, and analysis, making it easier to work with structured data.
@@ -162,9 +256,9 @@ Coding on VSCode with OpenFace was easier than expected, as the process was simi
 
 ## Week of 9/9/24
 ### Goals
-- Instal OpenFace on Windows
-- Test installation using command lines
-- Start documentation of research on GitHub
+1. Instal OpenFace on Windows
+2. Test installation using command lines
+3. Start documentation of research on GitHub
 -----
 #### OpenFace Installation
 Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
