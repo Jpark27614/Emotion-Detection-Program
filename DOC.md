@@ -114,4 +114,4 @@ Our program will utlizie a humanistic therapitic approach. Humanistic therapy ut
 3. Mindfulness and Meditation
 * Incorporates mindfulness practices to improve relationship with self and decrease anxiety
 
-
+![Screenshot 2024-10-07 132836](https://github.com/user-attachments/assets/32d611cb-5cf1-42c7-ae72-b8afb099ea09)
