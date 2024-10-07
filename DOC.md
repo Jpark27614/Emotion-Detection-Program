@@ -103,17 +103,17 @@ We then uploaded the test.csv to a While True which sends it to the AU script, t
 * Age (based on age how they emotionally respond) 
 * Family
 * Friends
-* Self reflection
+* Self-reflection
 
 ### Humanistic Therapy 
-Our program will utlizie a humanistic therapitic approach. Humanistic therapy utilizes various techniques aimed at fostering self-exploration, personal growth, and emotional well-being. It aims for self-actualization and realization of self-worth through flexibile and tailored techniques. Some of the techniques include: 
+Our program will utilize a humanistic therapeutic approach. Humanistic therapy utilizes various techniques aimed at fostering self-exploration, personal growth, and emotional well-being. It aims for self-actualization and realization of self-worth through flexible and tailored techniques. Some of the techniques include: 
 1. Active listening and empathy
-* Creates a safe and supportive environment -- open ended questions
+* Creates a safe and supportive environment -- open-ended questions
 2. Gestalt techniques
 * Helps clients become more aware of their thoughts, feelings, and actions in the present moment -- personal responsibility and self-awareness
 3. Mindfulness and Meditation
 * Incorporates mindfulness practices to improve relationship with self and decrease anxiety
 
-Some website we used for research are [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) and [Humanistic therapy](https://www.psychologytoday.com/us/therapy-types/humanistic-therapy) The image below is from [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) 
+Some websites we used for research are [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) and [Humanistic therapy](https://www.psychologytoday.com/us/therapy-types/humanistic-therapy) The image below is from [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) 
 
 ![Screenshot 2024-10-07 132836](https://github.com/user-attachments/assets/32d611cb-5cf1-42c7-ae72-b8afb099ea09)
