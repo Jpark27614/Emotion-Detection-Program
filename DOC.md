@@ -114,6 +114,6 @@ Our program will utlizie a humanistic therapitic approach. Humanistic therapy ut
 3. Mindfulness and Meditation
 * Incorporates mindfulness practices to improve relationship with self and decrease anxiety
 
-A website we used for research is [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) The image below is also from this website.
+Some website we used for research are [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) and [Humanistic therapy](https://www.psychologytoday.com/us/therapy-types/humanistic-therapy) The image below is also from [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) 
 
 ![Screenshot 2024-10-07 132836](https://github.com/user-attachments/assets/32d611cb-5cf1-42c7-ae72-b8afb099ea09)
