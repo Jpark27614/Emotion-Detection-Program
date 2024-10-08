@@ -4,10 +4,27 @@
 EmoDe is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EmoDe parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
 
 ## Goal
+
 EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
 
-------
 
+## Week of 10/8/24
+### Goals
+1. Download OpenFace and necessary libraries on personal computer to bypass administrative blocks.
+2. Pipe the OpenFace output to the VSCode script using webcam as input
+------
+Found device ID using command line on Powershell: ```Get-PnpDevice | Where-Object { $_.FriendlyName -eq "Integrated Webcam" } | Format-List *```
+
+Device ID: 
+Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000
+Surface Front: USB\VID_045E&PID_0990&MI_00\6&DB32C28&0&0000
+
+Used to open webcam feed with OpenFace command line: ```FaceLandmarkVid.exe -device USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000```
+
+```-device <device id> ``` the device ID of a webcam to perform feature extraction from a live feed.
+[OpenFace Webcam Command Line](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments#featureextraction-and-facelandmarkvidmulti)
+
+How can we store run analysis on this data?
 ## Week of 9/30/24
 ### Goals 
 1. Finalize application of emotion detection program
