@@ -17,7 +17,9 @@ Found device ID using command line on Powershell: ```Get-PnpDevice | Where-Objec
 
 Device ID: 
 Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000
+
 Surface Front: USB\VID_045E&PID_0990&MI_00\6&DB32C28&0&0000
+
 
 Used to open webcam feed with OpenFace command line: ```FaceLandmarkVid.exe -device USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000```
 
