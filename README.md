@@ -269,7 +269,7 @@ Coding on VSCode with OpenFace was easier than expected, as the process was simi
 3. Start documentation of research on GitHub
 -----
 #### OpenFace Installation
-Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Also referenced [Tutorial OpenFace Installation](https://youtu.be/e2-Wu_1poBY?si=PI63s-a72uTL974f) to download CEN patch experts. Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
+Installed OpenFace on Windows using [Windows Installation](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). Checked computing using Windows Powershell (32 bit). Also referenced [Tutorial OpenFace Installation](https://youtu.be/e2-Wu_1poBY?si=PI63s-a72uTL974f) to download CEN patch experts (timestamp - 2:30). Used Windows Powershell and command lines available at [OpenFace Command Lines](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments) to test installation.
 Note that videos must be in mp4 format to run through OpenFace application. The following command lines were used to run sequence analysis (locate facial points) on a video with one person (command line argument: ```FaceLandmarkVid```): 
 
 ``` ruby
