@@ -15,8 +15,9 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 ------
 Found device ID using command line on Powershell: ```Get-PnpDevice | Where-Object { $_.FriendlyName -eq "Integrated Webcam" } | Format-List *```
 
-Device ID: 
-Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000
+**Device ID:** 
+
+Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000     
 
 Surface Front: USB\VID_045E&PID_0990&MI_00\6&DB32C28&0&0000
 
