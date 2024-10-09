@@ -105,6 +105,8 @@ We then uploaded the test.csv to a While True which sends it to the AU script, t
 * Family
 * Friends
 * Self-reflection
+  
+![unnamed](https://github.com/user-attachments/assets/ec4ef787-ecba-48e3-9a38-3313953fc88e)
 
 ### Humanistic Therapy 
 Our program will utilize a humanistic therapeutic approach. Humanistic therapy utilizes various techniques aimed at fostering self-exploration, personal growth, and emotional well-being. It aims for self-actualization and realization of self-worth through flexible and tailored techniques. Some of the techniques include: 
