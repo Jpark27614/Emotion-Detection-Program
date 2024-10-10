@@ -27,7 +27,11 @@ Used to open webcam feed with OpenFace command line: ```FaceLandmarkVid.exe -dev
 ```-device <device id> ``` the device ID of a webcam to perform feature extraction from a live feed.
 [OpenFace Webcam Command Line](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments#featureextraction-and-facelandmarkvidmulti)
 
-How can we store run analysis on this data?
+How can we store data to run analysis?
+
+With the command, ```./FeatureExtraction.exe -device "USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000"``` , the webcam data was saved to the ```processed``` directory in OpenFace. The data includes an updating csv file with data points, an avi file, and other text documents. We will continue to work with this output to implement it into VSCode. 
+
+![Screenshot 2024-10-10 135528](https://github.com/user-attachments/assets/937bcef1-dfc0-4733-a2e9-ea705fc61201)
 ## Week of 9/30/24
 ### Goals 
 1. Finalize application of emotion detection program
