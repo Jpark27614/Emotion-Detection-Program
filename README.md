@@ -42,6 +42,36 @@ where
 
 This allows for control of the file names and what data is extracted compared to the command line using the device ID above. Control of file names, output directory, and data extracted is helpful for the OpenFace implementation in VSCode and saving storage space and increasing processing speed. 
 
+Code to constantly print new lines in csv file: 
+```python
+import time
+import csv
+
+
+def follow_csv(filename):
+    # Open the CSV file in read mode
+    with open(filename, 'r') as file:
+        # Move the pointer to the end of the file to read only new lines
+        file.seek(0, 2)
+        
+        while True:
+            # Read the new line
+            new_line = file.readline()
+            
+            if new_line:
+                # Convert the line into a CSV row (useful if there are commas, etc.)
+                reader = csv.reader([new_line])
+                for row in reader:
+                    # Print the new row
+                    print(row)
+            else:
+                # Sleep briefly before checking again (to avoid high CPU usage)
+                time.sleep(0.5)
+
+
+# Replace 'your_file.csv' with the path to your actively updating CSV file
+follow_csv(r'C:\Users\cchao2869\Desktop\OpenFace\processed\chao_face.csv')
+```
 
 ![Screenshot 2024-10-10 135528](https://github.com/user-attachments/assets/937bcef1-dfc0-4733-a2e9-ea705fc61201)
 ## Week of 9/30/24
