@@ -17,19 +17,31 @@ Found device ID using command line on Powershell: ```Get-PnpDevice | Where-Objec
 
 **Device ID:** 
 
-Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000     
+Computer webcam: USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000        
+Surface Front: USB\VID_045E&PID_0990&MI_00\6&DB32C28&0&0000       
 
-Surface Front: USB\VID_045E&PID_0990&MI_00\6&DB32C28&0&0000
-
-
-Used to open webcam feed with OpenFace command line: ```FaceLandmarkVid.exe -device USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000```
-
-```-device <device id> ``` the device ID of a webcam to perform feature extraction from a live feed.
+Used to open webcam feed with OpenFace command line: ```FaceLandmarkVid.exe -device USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000```      
+```-device <device id> ``` the device ID of a webcam to perform feature extraction from a live feed.     
 [OpenFace Webcam Command Line](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments#featureextraction-and-facelandmarkvidmulti)
 
-How can we store data to run analysis?
+**How can we store data to run analysis?**
 
 With the command, ```./FeatureExtraction.exe -device "USB\VID_0BDA&PID_5556&MI_00\6&2A2E4820&0&0000"``` , the webcam data was saved to the ```processed``` directory in OpenFace. The data includes an updating csv file with data points, an avi file, and other text documents. We will continue to work with this output to implement it into VSCode. 
+
+In order to implement with VSCode, it will be helpful to be able to control output file names and streamline data for processing time. This following command line was used to in order to specify the output:
+
+```./FeatureExtraction.exe -aus -device 0 -out_dir "C:\Users\cchao2869\Desktop\OpenFace\processed" -of "chao_test"```
+
+where 
+
+```FeatureExtraction``` executable extracts the facial expression features from the video input    
+```-aus``` tag extracts only the AU data to save storage and increase processing speed    
+```-device 0``` identifies the webcam as the desired video input with index 0 (usually 0 but can be 1, 2, ...)    
+```-out_dir``` directs OpenFace on which directory to put the output files     
+```-of``` specifies the name of the output files
+
+This allows for control of the file names and what data is extracted compared to the command line using the device ID above. Control of file names, output directory, and data extracted is helpful for the OpenFace implementation in VSCode and saving storage space and increasing processing speed. 
+
 
 ![Screenshot 2024-10-10 135528](https://github.com/user-attachments/assets/937bcef1-dfc0-4733-a2e9-ea705fc61201)
 ## Week of 9/30/24
