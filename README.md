@@ -7,6 +7,133 @@ EmoDe is an application focused on emotion detection using the OpenFace deep lea
 
 EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
 
+## Week of 10/14/24
+### Goals 
+1. Streamline the process of running command and Python script.
+
+----
+
+### Emotion Detection Code (V1)
+The code was finalized to detect emotions using the AUs defined in [AU-Emotion Combinations](https://github.com/Jpark27614/Emotion-Detection-Program/blob/main/DOC.md#action-unit-combinations-and-emotions).  If no emotion is detected, 'Neutral' will be printed. The biggest issue when extracting AU data is the format of the headers. After troubleshooting, it was determined that the whitespaces must be stripped in order for the code to run properly. This was key in correctly calling AU data headers (ex. 'AU01_c'). 
+
+
+``` python
+import time
+import csv
+import os
+
+def detect_emotion(data):
+    """Detects the emotion based on the provided Action Units."""
+    if (data['AU06'] == 1 and data['AU12'] == 1):  # Happiness
+        return "Happiness"
+    elif (data['AU01'] == 1 and data['AU04'] == 1 and data['AU15'] == 1):  # Sadness
+        return "Sadness"
+    elif (data['AU01'] == 1 and data['AU02'] == 1 and data['AU05'] == 1 and data['AU26'] == 1):  # Surprise
+        return "Surprise"
+    elif (data['AU01'] == 1 and data['AU02'] == 1 and data['AU04'] == 1 and 
+          data['AU05'] == 1 and data['AU07'] == 1 and data['AU20'] == 1 and data['AU26'] == 1):  # Fear
+        return "Fear"
+    elif (data['AU04'] == 1 and data['AU05'] == 1 and data['AU07'] == 1 and data['AU23'] == 1):  # Anger
+        return "Anger"
+    elif (data['AU09'] == 1 and data['AU15'] == 1):  # Disgust
+        return "Disgust"
+    
+    return "Neutral"
+
+def follow_csv(filename):
+    # Open the CSV file in read mode
+    with open(filename, 'r') as file:
+        # Check if the file is empty
+        if os.stat(filename).st_size == 0:
+            print("The file is empty.")
+            return
+
+        # Attempt to read the header row
+        try:
+            header = next(csv.reader(file))
+            print(f"Header found: {header}")  # Debug output
+        except StopIteration:
+            print("The file is empty or no header found.")
+            return
+
+        # Get indices for Action Units, ensuring to strip whitespace
+        try:
+            # Strip whitespace from header names
+            header = [name.strip() for name in header]
+            AU1_index = header.index('AU01_c')
+            AU2_index = header.index('AU02_c')
+            AU4_index = header.index('AU04_c')
+            AU5_index = header.index('AU05_c')
+            AU6_index = header.index('AU06_c')
+            AU7_index = header.index('AU07_c')
+            AU9_index = header.index('AU09_c')
+            AU12_index = header.index('AU12_c')
+            AU15_index = header.index('AU15_c')
+            AU20_index = header.index('AU20_c')
+            AU23_index = header.index('AU23_c')
+            AU26_index = header.index('AU26_c')
+            print(f"Indices found - AU01: {AU1_index}, AU02: {AU2_index}, AU04: {AU4_index}, AU05: {AU5_index}, AU06: {AU6_index}, AU07: {AU7_index}, AU09: {AU9_index}, AU12: {AU12_index}, AU15: {AU15_index}, AU20: {AU20_index}, AU23: {AU23_index}, AU26: {AU26_index}")  # Debug output
+        except ValueError as e:
+            print(f"Header error: {e}")
+            return
+
+        while True:
+            # Read the new line
+            new_line = file.readline()
+            if new_line:
+                # Debug output
+                reader = csv.reader([new_line.strip()])
+                for row in reader:
+                    try:
+                        data = {
+                            'AU01': int(float(row[AU1_index].strip())),
+                            'AU02': int(float(row[AU2_index].strip())),
+                            'AU04': int(float(row[AU4_index].strip())),
+                            'AU05': int(float(row[AU5_index].strip())),
+                            'AU06': int(float(row[AU6_index].strip())),
+                            'AU07': int(float(row[AU7_index].strip())),
+                            'AU09': int(float(row[AU9_index].strip())),
+                            'AU12': int(float(row[AU12_index].strip())),
+                            'AU15': int(float(row[AU15_index].strip())),
+                            'AU20': int(float(row[AU20_index].strip())),
+                            'AU23': int(float(row[AU23_index].strip())),
+                            'AU26': int(float(row[AU26_index].strip())),
+                        }
+                        emotion = detect_emotion(data)
+                        print(f"Detected Emotion: {emotion}")
+                    except ValueError as e:
+                        print(f"Value error: {e}")
+            else:
+                time.sleep(0.5)
+
+# Replace with the path to your actively updating CSV file
+follow_csv(r'C:\Users\carol\OneDrive\Desktop\OpenFace\processed\chao_face.csv')
+```
+
+### Using batch file to integrate PowerShell and Python
+
+In order to begin webcam input (on PowerShell) and run Python script to analyze output, a batch file was created. When opened, this file runs the OpenFace commands on PowerShell, delays 5 seconds, and runs the Python script. The output of the python script is visible on PowerShell. 
+
+Batch file: 
+```
+@echo off
+cd "C:\Users\carol\OneDrive\Desktop\OpenFace"
+start /B FeatureExtraction.exe -aus -device 0 -out_dir "C:\Users\carol\OneDrive\Desktop\OpenFace\processed" -of "chao_face"
+timeout /t 5
+cd "C:\Users\carol\OneDrive\Desktop\chao_py"
+python csv_monitor.py
+
+```
+
+```@echo off```: Hides the command being executed, making the output cleaner.       
+```cd```: Changes the directory to where OpenFace files are located.      
+```start /B```: Runs the FeatureExtraction.exe command in the background.        
+```timeout /t 5```: Waits for 5 seconds to allow csv to have data.       
+
+Here is the output on PowerShell when the batch file ```run_extraction.bat``` is opened:      
+
+https://github.com/user-attachments/assets/c15e8b2f-180a-4b26-b618-b062943dfa9d
+
 
 ## Week of 10/8/24
 ### Goals
@@ -74,6 +201,8 @@ follow_csv(r'C:\Users\cchao2869\Desktop\OpenFace\processed\chao_face.csv')
 ```
 
 ![Screenshot 2024-10-10 135528](https://github.com/user-attachments/assets/937bcef1-dfc0-4733-a2e9-ea705fc61201)
+
+
 ## Week of 9/30/24
 ### Goals 
 1. Finalize application of emotion detection program
