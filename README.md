@@ -10,9 +10,43 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 ## Week of 10/14/24
 ### Goals 
 1. Streamline the process of running command and Python script.
+2. Increase accuracy of emotion detection.
 
 ----
+### Increasing Accuracy 
 
+Using the ```emotion_detection``` function below , we can increase the accuracy of the program by changing the following variables.     
+- Use of AU intesity and binary data in unison
+- Order of emotions
+- Threshold of AU intensity data
+- Delay in loop for webcam lag
+- AUs for each emotion
+- Amount of time each emotion is displayed
+- Delay in emotional response after question is posed
+
+Currently, the program has the hardest time detecting anger, disgust, and fear. Happiness is the easiest to detect. However, the program confuses emotions such as anger and disgust for happiness if the user is smiling slightly. Because of this, I am considering adding a counter argument that does not detect happiness if other AUs are present. The first change made to the emotion detection function was to change the order of the ```else if``` statements. This way, the program will look for anger, disgust, etc. before happiness. I am currently working on the use of AU intensity and binary data in unison.
+
+
+``` python
+def detect_emotion(data):
+    """Detects the emotion based on the provided Action Units."""
+    if (data['AU04r'] > threshold and data['AU05r'] > threshold and data['AU07r'] > threshold and data['AU23r'] > threshold):  # Anger
+        return "Anger"
+    elif (data['AU01c'] == 1 and data['AU04r'] > threshold and data['AU15c'] == 1):  # Sadness
+        return "Sadness"
+    elif (data['AU09c'] == 1 and data['AU15c'] == 1):  # Disgust
+        return "Disgust"
+    elif (data['AU06c'] == 1 and data['AU12c'] == 1):  # Happiness
+        return "Happiness"
+    elif (data['AU01c'] == 1 and data['AU02c'] == 1 and data['AU05c'] == 1 and data['AU26c'] == 1):  # Surprise
+        return "Surprise"
+    elif (data['AU01c'] == 1 and data['AU02c'] == 1 and data['AU04r'] > threshold and 
+          data['AU05r'] > threshold and data['AU07r'] > threshold and data['AU20c'] == 1 and data['AU26c'] == 1):  # Fear
+        return "Fear"
+    
+    
+    return "Neutral"
+```
 ### Emotion Detection Code (V1)
 The code was finalized to detect emotions using the AUs defined in [AU-Emotion Combinations](https://github.com/Jpark27614/Emotion-Detection-Program/blob/main/DOC.md#action-unit-combinations-and-emotions).  If no emotion is detected, 'Neutral' will be printed. The biggest issue when extracting AU data is the format of the headers. After troubleshooting, it was determined that the whitespaces must be stripped in order for the code to run properly. This was key in correctly calling AU data headers (ex. 'AU01_c'). 
 
