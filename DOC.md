@@ -92,6 +92,9 @@ Human: Thanks for asking my family is great! * smiles *
 
 Emode: Detects facial features of happiness and links family to happiness. 
 
+### World Application 
+According to [statistics about therapy and mental health in the us](https://www.google.com/search?q=how+many+americans+see+therapists&rlz=1C1GCEA_enUS1123US1123&oq=how+many+americans+see+therapists&gs_lcrp=EgZjaHJvbWUyCggAEEUYFhgeGDkyCAgBEAAYFhgeMg0IAhAAGIYDGIAEGIoFMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMg0IBRAAGIYDGIAEGIoFMgoIBhAAGIAEGKIEMgoIBxAAGIAEGKIE0gEJMTE0NzBqMWo3qAIAsAIA&sourceid=chrome&ie=UTF-8&safe=active&ssui=on) 
+
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
 The webcam was especially challenging code-wise. A lot of the websites and links we needed were blocked by the school connection. To overcome this we used a tool called [Powershell](https://learn.microsoft.com/en-us/powershell/). We used Powershell to find certain information about the device we were using and ran code to open certain files that may not have been possible because of school wifi. 
