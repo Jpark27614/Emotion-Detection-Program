@@ -93,7 +93,7 @@ Human: Thanks for asking my family is great! * smiles *
 Emode: Detects facial features of happiness and links family to happiness. 
 
 ### World Application 
-According to [statistics about therapy and mental health in the us]([https://www.google.com/search?q=how+many+americans+see+therapists&rlz=1C1GCEA_enUS1123US1123&oq=how+many+americans+see+therapists&gs_lcrp=EgZjaHJvbWUyCggAEEUYFhgeGDkyCAgBEAAYFhgeMg0IAhAAGIYDGIAEGIoFMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMg0IBRAAGIYDGIAEGIoFMgoIBhAAGIAEGKIEMgoIBxAAGIAEGKIE0gEJMTE0NzBqMWo3qAIAsAIA&sourceid=chrome&ie=UTF-8&safe=active&ssui=on](https://mydenvertherapy.com/therapy-mental-health-statistics/#:~:text=Percentage%20of%20people%20who%20see%20a%20therapist&text=Here%20are%20some%20statistics%20about,see%20a%20therapist%20each%20year.)) 
+According to [statistics about therapy and mental health in the US]([https://www.google.com/search?q=how+many+americans+see+therapists&rlz=1C1GCEA_enUS1123US1123&oq=how+many+americans+see+therapists&gs_lcrp=EgZjaHJvbWUyCggAEEUYFhgeGDkyCAgBEAAYFhgeMg0IAhAAGIYDGIAEGIoFMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMg0IBRAAGIYDGIAEGIoFMgoIBhAAGIAEGKIEMgoIBxAAGIAEGKIE0gEJMTE0NzBqMWo3qAIAsAIA&sourceid=chrome&ie=UTF-8&safe=active&ssui=on](https://mydenvertherapy.com/therapy-mental-health-statistics/#:~:text=Percentage%20of%20people%20who%20see%20a%20therapist&text=Here%20are%20some%20statistics%20about,see%20a%20therapist%20each%20year.)) 
 
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
