@@ -93,7 +93,7 @@ Human: Thanks for asking my family is great! * smiles *
 Emode: Detects facial features of happiness and links family to happiness. 
 
 ### World Application 
-According to [statistics about therapy and mental health in the US](https://mydenvertherapy.com/therapy-mental-health-statistics/#:~:text=Percentage%20of%20people%20who%20see%20a%20therapist&text=Here%20are%20some%20statistics%20about,see%20a%20therapist%20each%20year.) 
+According to the [National Alliance of Mental Illness](https://www.nami.org/about-mental-illness/mental-health-by-the-numbers/?scrlybrkr=a46a3237#:~:text=Millions%20of%20people%20are%20affected,represents%201%20in%205%20adults.), one in 5 adults struggle with mental illness. Additionally, [4 out of 10](https://www.fountainhouse.org/news/4-out-of-10-americans-cant-access-mental-health-care-when-they-need-it-community-based-support-is-an-immediate-solution) Americans can't access mental health care. EMODE aims to reduce these statistics. We hope to create an easily accessible program that tracks a person's mental well-being through facial recognition. Our goal is for EMODE to be a cheaper alternative for other services like therapy so that mental health care is accessible to everyone. 
 
 ## Webcam
 To use the webcam for our code we had to take a couple of steps. First, we ran a line of code
