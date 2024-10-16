@@ -10,11 +10,12 @@
 
 ## Schedule 
 
-* Finish brainstorm and research- Weeks 3-4
-* Research, install OpenFace, and test- Weeks 4-5
-* Develop and finalize our application for emotion detection- Weeks 5-7
-* Test and create code for the application and response- Weeks 7-15
-* Document- Weeks 4-17
+* Finish brainstorm and research: Sep 9-13
+* Research, install OpenFace, and test: Sep 9-20
+* Develop and finalize our application for emotion detection: Sep 16-Oct 4
+* Test and create code for the application and response: Sep 30-Nov 29
+* Document: Sep 9-Dec 6
+* Prepare presentation: Nov 29-Dec 9
 
 ## Research 
 Our first step was to comprehend the steps and process of facial recognition. We used the website [Medium.com](https://medium.com/@Coursesteach/building-a-real-time-emotion-detection-with-python-7fe6090a125d) to break down the process of facial recognition into manageable chunks. 
