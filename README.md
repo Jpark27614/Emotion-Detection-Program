@@ -11,8 +11,24 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 ### Goals 
 1. Streamline the process of running command and Python script.
 2. Increase accuracy of emotion detection.
+3. Research decision trees and implement ```if then``` framework.
 
 ----
+### Decision Trees / If-Then
+
+```python
+def ask_question(emotion):
+    if emotion == "Happiness":
+        return "I'm glad to hear it!"
+    elif emotion in ["Sadness", "Anger"]:
+        return "What about your situation makes you feel this way?"
+    elif emotion == "Fear":
+        return "Are you concerned for your family?"
+    else:
+        return "How is your family?"  # Default question for neutral or other emotions
+
+```
+
 ### Increasing Accuracy 
 
 Using the ```emotion_detection``` function below , we can increase the accuracy of the program by changing the following variables.     
