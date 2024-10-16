@@ -24,13 +24,12 @@ Using the ```emotion_detection``` function below , we can increase the accuracy 
 - Amount of time each emotion is displayed
 - Delay in emotional response after question is posed
 
-Currently, the program has the hardest time detecting anger, disgust, and fear. Happiness is the easiest to detect. However, the program confuses emotions such as anger and disgust for happiness if the user is smiling slightly. Because of this, I am considering adding a counter argument that does not detect happiness if other AUs are present. The first change made to the emotion detection function was to change the order of the ```else if``` statements. This way, the program will look for anger, disgust, etc. before happiness. I am currently working on the use of AU intensity and binary data in unison.
+Currently, the program has the hardest time detecting anger, disgust, and fear. Happiness is the easiest to detect. However, the program confuses emotions such as anger and disgust for happiness if the user is smiling slightly. Because of this, I am considering adding a counter argument that does not detect happiness if other AUs are present. The first change made to the emotion detection function was to change the order of the ```else if``` statements. This way, the program will look for anger, disgust, etc. before happiness. I am currently working on the use of AU intensity and binary data and which is more accurate.
 
 
 ``` python
 def detect_emotion(data):
-    """Detects the emotion based on the provided Action Units."""
-    if (data['AU04r'] > threshold and data['AU05r'] > threshold and data['AU07r'] > threshold and data['AU23r'] > threshold):  # Anger
+    if (data['AU04c'] == 1 and data['AU05c'] == 1 and data['AU07c'] == 1 and data['AU23c'] == 1):  # Anger
         return "Anger"
     elif (data['AU01c'] == 1 and data['AU04r'] > threshold and data['AU15c'] == 1):  # Sadness
         return "Sadness"
