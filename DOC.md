@@ -124,5 +124,14 @@ Our program will utilize a humanistic therapeutic approach. Humanistic therapy u
 Some websites we used for research are [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) and [Humanistic therapy](https://www.psychologytoday.com/us/therapy-types/humanistic-therapy) The image below is from [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) 
 
 ![Screenshot 2024-10-22 134910](https://github.com/user-attachments/assets/339a28d7-1220-43fa-a56e-e5ed452c39d8)
+
+### Question Examples 
+* What specific event or situation triggered your happiness?
+* What thoughts are leading to your sadness?
+* What specific situation or person is making you feel angry?
+* Are there any fears or concerns that accompany your surprise?
+
+Questions like this would emphasize and focus on the root of the issue. While our program will be somewhat therapeutic our goal isn't to make a therapy bot instead to make a program that helps you to identify and overcome what is making you feel a certain emotion. 
+
 ## Audio 
 Another aspect of the emotion detection i 
