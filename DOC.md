@@ -124,6 +124,5 @@ Our program will utilize a humanistic therapeutic approach. Humanistic therapy u
 Some websites we used for research are [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) and [Humanistic therapy](https://www.psychologytoday.com/us/therapy-types/humanistic-therapy) The image below is from [Humanistic Approach In Psychology](https://www.simplypsychology.org/humanistic.html#:~:text=The%20humanistic%20approach%20emphasizes%20the,overcome%20hardship%2C%20pain%20and%20despair.) 
 
 ![Screenshot 2024-10-22 134910](https://github.com/user-attachments/assets/339a28d7-1220-43fa-a56e-e5ed452c39d8)
-
 ## Audio 
 Another aspect of the emotion detection i 
