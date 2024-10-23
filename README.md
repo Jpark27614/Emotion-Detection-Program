@@ -3,9 +3,29 @@
 ## Abstract
 EmoDe is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EmoDe parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
 
-## Goal
 
 EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
+
+## Week of 10/21/24
+### Goals 
+1. Research audio analysis libraries/models with Python and choose one that best fits program.
+2. Define relationship between audio features and emotions.
+3. Download and test audio analysis library/model.
+
+----
+
+
+### Audio Features and Emotions
+We will increase the accuracy of the emotion detection program by extracting additional data points through audio analysis. According to [Detection and Analysis of Human Emotions through Voice and Speech Pattern Processing](https://arxiv.org/pdf/1710.10198), the most important audio features are pitch, SPL, timbre, and time gaps between consecutive words of speech. These relate to emotions as shown in the table below. 
+
+| **Audio Feature**        | **Happiness**                                       | **Surprise**                                        | **Sadness**                                          | **Disgust**                                          | **Anger**                                             | **Fear**                                               |
+|--------------------------|----------------------------------------------------|----------------------------------------------------|-----------------------------------------------------|-----------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
+| **Pitch**                 | High pitch, variable                               | High pitch, rising sharply                         | Low pitch, flat and falling                         | Low pitch, flat                                      | Sharp, high variation, sometimes high-pitched          | High pitch, rising at the end, or shaky                |
+| **SPL (Loudness)**        | Moderate to high                                   | High                                                | Low                                                 | Low                                                  | High, sometimes very loud                              | Moderate to high, varies with intensity                |
+| **Timbre**                | Bright, rich, clear tones                          | Sharp, clear tones                                 | Dull, flat, low energy                              | Harsh, rough, tense                                  | Harsh, strained, sharp                                | Soft or tense, sometimes breathy                       |
+| **Time Gaps Between Words**| Rapid speech with shorter gaps                    | Rapid speech with shorter gaps                     | Slow speech, longer pauses between words            | Slow, deliberate speech                              | Fast, tense speech with short gaps, sometimes irregular| Moderate speech speed with irregular or long pauses    |
+
+
 
 ## Week of 10/14/24
 ### Goals 
