@@ -25,6 +25,92 @@ We will increase the accuracy of the emotion detection program by extracting add
 | **Timbre**                | Bright, rich, clear tones                          | Sharp, clear tones                                 | Dull, flat, low energy                              | Harsh, rough, tense                                  | Harsh, strained, sharp                                | Soft or tense, sometimes breathy                       |
 | **Time Gaps Between Words**| Rapid speech with shorter gaps                    | Rapid speech with shorter gaps                     | Slow speech, longer pauses between words            | Slow, deliberate speech                              | Fast, tense speech with short gaps, sometimes irregular| Moderate speech speed with irregular or long pauses    |
 
+#### Explanation of Features:
+- Pitch: The perceived frequency of the sound, typically higher in excited states (happiness, fear, surprise) and lower in subdued states (sadness, disgust).
+- SPL (Sound Pressure Level): Related to the loudness of the speech. Higher SPL often indicates intense emotions like anger or surprise, while lower SPL is associated with sadness or calm emotions.
+- Timbre: The quality or "color" of the voice, affected by harmonic content and how tense or relaxed the voice sounds. Emotions like happiness and surprise have richer harmonic content, while sadness and disgust often have dull or harsh qualities.
+- Time Gaps Between Words: The pauses or silences in speech. Shorter gaps and faster speech are typically seen in emotions like happiness and anger, while longer gaps are associated with sadness or fear.
+
+
+This information was found through studies in speech emotion recognition (SER). In our research in SER, we found that might be benficial in the future to our theraputic application in emotion detection by defining possible stimuli to emotions. See "Table of Speech and Emotions" on pages 47 and 48 of [Emotion recognition in human-computer interaction](https://www.researchgate.net/publication/3321357_Emotion_recognition_in_human-computer_interaction). 
+
+| **Stimulus**                      | **Cognition**               | **Emotion**   | **Behavior**  |
+|-----------------------------------|-----------------------------|---------------|---------------|
+| **Threat**                        | Danger                      | Fear          | Escape        |
+| **Obstacle**                      | Enemy                       | Anger         | Attack        |
+| **Potential mate**                | Possess                     | Joy           | Mate          |
+| **Loss of valued individual**     | Abandonment                 | Sadness       | Cry           |
+| **Member of one’s group**         | Friend                      | Acceptance    | Groom         |
+| **Unpalatable object**            | Poison                      | Disgust       | Vomit         |
+| **New territory**                 | What’s out there?           | Expectation   | Map           |
+| **Unexpected object**             | What is it?                 | Surprise      | Stop          |
+
+### pyAudioAnalysis
+
+pyAudioAnalysis is a library on Python for audio feature extraction, classification, segmentation. pyAudioAnalysis can extract data features such as pitch, intensity, and spectral properties, so we will use it in our emotion detection program. We will begin by simply analyzing pitch, SPL, and timbre, as these are the easiest audio features to extract. After downloading pyAudioAnalysis and the required dependencies (as well as numpy and librosa) shown below, we have the following code: 
+
+#### Installation of libraries:
+```pip install librosa soundfile numpy ```
+
+#### Initial audio extraction code: 
+``` python
+import numpy as np
+import librosa
+import soundfile as sf
+import matplotlib.pyplot as plt
+import librosa.display
+
+# Load the audio file
+audio_path = r"C:\Users\cchao2869\Desktop\pyAudio\chao_audio.wav"
+y, sr = librosa.load(audio_path, sr=None)
+
+# Extract Pitch using librosa's YIN (fundamental frequency estimation)
+f0, voiced_flag, voiced_probs = librosa.pyin(y, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C7'))
+
+# Handle NaN values in pitch
+mean_f0 = np.nanmean(f0)
+f0_cleaned = np.where(np.isnan(f0), mean_f0, f0)
+
+# Calculate SPL (Sound Pressure Level)
+rms = np.sqrt(np.mean(y**2))  # Root mean square for pressure level
+p_ref = 20e-6  # Reference sound pressure in air
+spl = 20 * np.log10(rms / p_ref)  # SPL in decibels
+
+# Extract Timbre features (MFCCs and spectral features)
+mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)  # 13 MFCC coefficients
+spectral_centroid = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
+spectral_bandwidth = librosa.feature.spectral_bandwidth(y=y, sr=sr)[0]
+spectral_contrast = librosa.feature.spectral_contrast(y=y, sr=sr)
+
+# Print results
+print("Pitch (Hz):", f0_cleaned)
+print("SPL (dB):", spl)
+print("MFCCs (Timbre):", mfccs)
+print("Spectral Centroid (Timbre):", spectral_centroid)
+print("Spectral Bandwidth (Timbre):", spectral_bandwidth)
+print("Spectral Contrast (Timbre):", spectral_contrast)
+
+# Plotting Pitch
+plt.figure(figsize=(10, 6))
+plt.plot(f0_cleaned, label='Pitch (Hz)', color='blue')
+plt.xlabel('Frame')
+plt.ylabel('Pitch (Hz)')
+plt.title('Extracted Pitch over Time')
+plt.legend()
+plt.grid()
+plt.show()
+
+# Plotting MFCCs
+plt.figure(figsize=(10, 6))
+librosa.display.specshow(mfccs, x_axis='time', sr=sr)
+plt.colorbar()
+plt.title('MFCCs')
+plt.show()
+```
+
+
+Output: ![Figure_1](https://github.com/user-attachments/assets/75eb4079-191a-4e21-a0f4-ea66a41d4761)
+
 
 
 ## Week of 10/14/24
