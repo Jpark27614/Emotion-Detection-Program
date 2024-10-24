@@ -134,4 +134,10 @@ Some websites we used for research are [Humanistic Approach In Psychology](https
 Questions like this would emphasize and focus on the root of the issue. While our program will be somewhat therapeutic our goal isn't to make a therapy bot instead to make a program that helps you to identify and overcome what is making you feel a certain emotion. 
 
 ## Audio 
-Another aspect of the emotion detection i 
+Another aspect of emotion detection is audio. We can analyze pitch to confirm with facial recognition that the emotion is genuine. For example, you can plaster on a smile but a lone tone of voice might imply you are sad or faking happiness. 
+
+* Sadness is usually around 100-200 Hz
+* Happiness is usually around 200-400 Hz
+* Suprise is usually from 300-500 Hz
+* Anger is usually from 400+ Hz
+
