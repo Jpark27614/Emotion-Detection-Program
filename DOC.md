@@ -141,3 +141,5 @@ Another aspect of emotion detection is audio. We can analyze pitch to confirm wi
 * Suprise is usually from 300-500 Hz
 * Anger is usually from 400+ Hz
 
+The only hiccup in using this system is that surprise overlaps with Happiness and anger. One way to differentiate this is with pitch variation because happiness and anger are more constant while surprise usually spikes and dips. Although this is a solution we may not implement it for simplicity's sake. The solution would be to prioritize happiness or anger because EMODE can ask more specific questions based on those emotions. 
+
