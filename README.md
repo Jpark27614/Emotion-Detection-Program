@@ -13,6 +13,19 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 3. Download and test audio analysis library/model.
 
 ----
+### Pitch and MCFFs Graph Analysis
+
+Using the code below, several audio files were tested where the speaker attempted to exemplify each of the emotions: happiness, sadness, anger, surprise, fear, and disgust. Data was extracted for the pitch and mel-frequency cepstral coefficients (MFCCs) of each audio file. MFCCs capture the timbral features of the audio, reflecting the texture and quality of the sound. Higher MFCC values may indicate brighter, richer sounds, while lower values might suggest dull or flat sounds. Analysis of the pitch and MCFFs diagrams for each emotion is described below: 
+
+#### Happiness
+
+
+
+#### Fear
+Fear is characterized by sharp rises in pitch. This is shown on the graph below at frame 325. 
+![fear_ex](https://github.com/user-attachments/assets/3dfdbe37-66d8-4efe-843a-0a64b786e41b)
+
+![fear_mcffs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
 
 
 ### Audio Features and Emotions
