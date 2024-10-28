@@ -6,16 +6,23 @@ EmoDe is an application focused on emotion detection using the OpenFace deep lea
 
 EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
 
-## Week of 10/21/24
-### Goals 
-1. Research audio analysis libraries/models with Python and choose one that best fits program.
-2. Define relationship between audio features and emotions.
-3. Download and test audio analysis library/model.
 
-----
+## Week of 10/28/24
+### Goals 
+1. Analyze pitch and MCFFs graphs for emotion set (happiness, sadness, anger, fear, surprise, disgust). Note major characteristics and compare to research findings.
+2. Write emotion detection function using audio features based on analysis of pitch and MCFFs. 
+
+
 ### Pitch and MCFFs Graph Analysis
 
 Using the code below, several audio files were tested where the speaker attempted to exemplify each of the emotions: happiness, sadness, anger, surprise, fear, and disgust. Data was extracted for the pitch and mel-frequency cepstral coefficients (MFCCs) of each audio file. MFCCs capture the timbral features of the audio, reflecting the texture and quality of the sound. Higher MFCC values may indicate brighter, richer sounds, while lower values might suggest dull or flat sounds. Analysis of the pitch and MCFFs diagrams for each emotion is described below: 
+
+#### Interpreting MCFFs Graphs
+While the graphs for pitch are fairly straightforward, those for MCFFs can be more complicated to analyze. Some general guidelines are below to simplify the process: 
+
+1. X-axis: Time in seconds, Y-axis: MFCC coefficient index (1 to 13)
+2. Color: Red (High Values) - Higher amplitudes of the MFCC coefficients. This suggests that the specific timbral features captured by those coefficients are more pronounced in the audio signal during those time frames.     
+Blue (Low Values) - Lower amplitudes of the MFCC coefficients, suggesting that those timbral features are less prominent or almost absent during those time frames.
 
 #### Happiness
 
@@ -27,6 +34,14 @@ Fear is characterized by sharp rises in pitch. This is shown on the graph below 
 
 ![fear_mcffs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
 
+
+## Week of 10/21/24
+### Goals 
+1. Research audio analysis libraries/models with Python and choose one that best fits program.
+2. Define relationship between audio features and emotions.
+3. Download and test audio analysis library/model.
+
+----
 
 ### Audio Features and Emotions
 We will increase the accuracy of the emotion detection program by extracting additional data points through audio analysis. According to [Detection and Analysis of Human Emotions through Voice and Speech Pattern Processing](https://arxiv.org/pdf/1710.10198), the most important audio features are pitch, SPL, timbre, and time gaps between consecutive words of speech. These relate to emotions as shown in the table below. 
