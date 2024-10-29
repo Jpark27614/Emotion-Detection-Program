@@ -24,27 +24,43 @@ While the graphs for pitch are fairly straightforward, those for MCFFs can be mo
 2. Color: Red (High Values) - Higher amplitudes of the MFCC coefficients. This suggests that the specific timbral features captured by those coefficients are more pronounced in the audio signal during those time frames.     
 Blue (Low Values) - Lower amplitudes of the MFCC coefficients, suggesting that those timbral features are less prominent or almost absent during those time frames.
 
+#### Fear
+Pitch: Fear is characterized by sharp rises in pitch. This is shown on the graph below at frame 325.    
+MCFFs: The shaky, sharp audio quality displayed in fear is visible in the graph for MCFFs as well. As shown in the higher MCFFs (10-13), the timbre of the audio shifts quickly.  
+![fear_ex](https://github.com/user-attachments/assets/3dfdbe37-66d8-4efe-843a-0a64b786e41b)
+
+![fear_mcffs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
+
 #### Happiness
-Happiness is characterized by a consitent shift from low to high. This is shown from fram 200 to 400. Note: audio began before speech, so data from (0, 2)U(4.5, 6) can be disregarded. 
+Pitch: Happiness is characterized by a consitent shift from low to high. This is shown from fram 200 to 400. Note: audio began before speech, so data from (0, 2)U(4.5, 6) can be disregarded.      
+MCFFs: From 2-4.5 seconds, a visible change is evident in the MCFFs graph. This is consistent with the shift in pitch during frames 200 to 400. 
 ![happy_pitch](https://github.com/user-attachments/assets/5215c441-15a7-41d5-a7eb-669e6fbef05f)
 
-From 2-4.5 seconds, a visible change is evident in the MCFFs graph. This is consistent with the shift in pitch during frames 200 to 400. 
 ![happy_mcffs](https://github.com/user-attachments/assets/b6152792-25ef-48a8-8353-ed6ea4dfa60d)
 
 #### Sadness
-Sadness is characterized by a low pitch with little variations. This is shown below because the X-axis (pitch in dB) ranges from 60 to 160, and is almost always at around 110 dB. 
+Pitch: Sadness is characterized by a low pitch with little variations. This is shown below because the X-axis (pitch in dB) ranges from 60 to 160, and is almost always at around 110 dB.      
+MCFFs: The MCFFs data below shows consistently low MCFFs values during the interval of speech. This aligns with the characteristics of sadness as low, dull, and flat timbre. 
 ![sad_pitch](https://github.com/user-attachments/assets/e3eeb22b-1da1-4f18-b7f9-89df5886c961)
 
-The MCFFs data below shows consistently low MCFFs values during the interval of speech. This aligns with the characteristics of sadness as low, dull, and flat timbre. 
 ![sad_mcffs](https://github.com/user-attachments/assets/80e6febe-37fd-4657-81d8-3f5c5f5427e4)
 
-#### Fear
-Fear is characterized by sharp rises in pitch. This is shown on the graph below at frame 325. 
-![fear_ex](https://github.com/user-attachments/assets/3dfdbe37-66d8-4efe-843a-0a64b786e41b)
+#### Anger
+Pitch: Anger is characterized by high variations in pitch. This is evident in the range of pitch from 50-250 frames.    
+![anger_pitch](https://github.com/user-attachments/assets/5d273698-50e1-4e1c-8f7f-984248bc4495)
+![anger_mcffs](https://github.com/user-attachments/assets/3025edbe-3fcf-4713-9300-91a487fc52d3)
 
-The shaky, sharp audio quality displayed in fear is visible in the graph for MCFFs as well. As shown in the higher MCFFs (10-13), the timbre of the audio shifts quickly.  
-![fear_mcffs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
 
+#### Disgust 
+![disgust_pitch](https://github.com/user-attachments/assets/6e1860f1-f889-4818-b1fe-58ac09063515)
+
+![disgust_mcffs](https://github.com/user-attachments/assets/75cfb177-1fb8-4e53-9a41-b95fca5a90b7)
+
+
+#### Surprise
+![surprise_pitch](https://github.com/user-attachments/assets/2424454a-c079-4ed6-9c2a-0306e3c208cd)
+
+![suprise_pitch](https://github.com/user-attachments/assets/cd68a514-a273-44c3-aac8-85243faf45b4)
 
 ## Week of 10/21/24
 ### Goals 
