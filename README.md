@@ -12,7 +12,86 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 1. Analyze pitch and MCFFs graphs for emotion set (happiness, sadness, anger, fear, surprise, disgust). Note major characteristics and compare to research findings.
 2. Write emotion detection function using audio features based on analysis of pitch and MCFFs. 
 
+### Emotion Detection using Pitch 
+The analysis of audio features including pitch and MCFFs below has led to the conclusion that pitch is the easiest and most helpful data point to analyze in order to detect emotions. The following code script used the information collected during data analysis below and the Audio Features and Emotions table. 
 
+``` python
+import librosa
+import numpy as np
+
+def load_audio(file_path):
+    # Load the audio file
+    y, sr = librosa.load(file_path)
+    return y, sr
+
+def extract_pitch(y, sr):
+    # Estimate pitch using librosa's pitch detection
+    pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
+    
+    # Extract pitch values
+    pitch_values = []
+    for t in range(pitches.shape[1]):
+        index = magnitudes[:, t].argmax()
+        pitch = pitches[index, t]
+        if pitch > 0:  # Filter out zero values
+            pitch_values.append(pitch)
+    
+    return np.array(pitch_values)
+
+import numpy as np
+
+def analyze_emotion(pitch_values):
+    """
+    Analyzes a list of pitch values to determine the associated emotion.
+
+    Parameters:
+        pitch_values (list or np.array): An array of pitch values.
+
+    Returns:
+        str: The inferred emotion based on pitch characteristics.
+    """
+    if len(pitch_values) == 0:
+        return "No data"
+
+    # Calculate pitch features
+    mean_pitch = np.mean(pitch_values)
+    pitch_range = np.ptp(pitch_values)  # Peak-to-peak range
+    pitch_variation = np.std(pitch_values)  # Standard deviation for variability
+    pitch_diff = np.diff(pitch_values)  # Difference between consecutive pitches
+
+    # Emotion inference based on refined pitch characteristics
+    if mean_pitch > 180 and pitch_variation > 20:  # High pitch and variability for happiness
+        return "Happiness"
+    elif mean_pitch > 180 and np.max(pitch_diff) > 50:  # High pitch and sharp rising for surprise
+        return "Surprise"
+    elif mean_pitch < 150 and pitch_variation < 15 and np.all(pitch_diff < 0):  # Low pitch, flat and falling for sadness
+        return "Sadness"
+    elif mean_pitch < 150 and pitch_variation < 10:  # Low pitch, flat for disgust
+        return "Disgust"
+    elif pitch_variation > 50 and (mean_pitch > 180 or np.max(pitch_diff) > 50):  # Sharp variation, high pitch for anger
+        return "Anger"
+    elif mean_pitch > 180 and (np.any(pitch_diff > 0) or pitch_variation > 20):  # High pitch, rising at end or shaky for fear
+        return "Fear"
+    else:
+        return "Neutral/Uncertain"
+
+
+
+
+def detect_emotion(file_path):
+    # Load and process the audio file
+    y, sr = load_audio(file_path)
+    pitch_values = extract_pitch(y, sr)
+    
+    # Infer emotion from pitch data
+    emotion = analyze_emotion(pitch_values)
+    return emotion
+
+# Example usage
+file_path = r"C:\Users\cchao2869\Desktop\pyAudio\happy_ex.wav"
+emotion = detect_emotion(file_path)
+print(f"Detected Emotion: {emotion}")
+```
 ### Pitch and MCFFs Graph Analysis
 
 Using the code below, several audio files were tested where the speaker attempted to exemplify each of the emotions: happiness, sadness, anger, surprise, fear, and disgust. Data was extracted for the pitch and mel-frequency cepstral coefficients (MFCCs) of each audio file. MFCCs capture the timbral features of the audio, reflecting the texture and quality of the sound. Higher MFCC values may indicate brighter, richer sounds, while lower values might suggest dull or flat sounds. One limitation of the MCFF data is that it appears that the values are 0 for the majority of coefficients. Analysis of the pitch and MCFFs diagrams for each emotion is described below: 
