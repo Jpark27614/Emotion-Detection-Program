@@ -6,6 +6,135 @@ EmoDe is an application focused on emotion detection using the OpenFace deep lea
 
 EmoDe will prompt the user with personal questions to elicit an emotional response, and provide a report of what makes the user happy, sad, angry, etc. The questions will focus on a specific topic when an emotion is detected or broaden in scope if no emotional response is observed. The goal of this is to be more aware of what triggers certain emotions in order to make informed decisions about daily activities and interactions to increase emotional well-being. EmoDe will output a report of what topics make the user react with certain emotions, and steps the user can take to improve their mental well-being. 
 
+## Week of 11/4/24
+### Goals
+1. Design experiement to standarize pitch values.
+2. Write code script for pitch data analysis.
+
+
+### Pitch Data Analysis Code
+This code takes a series of wav audio files and creates a data frame that contains their pitch audio features. However, there are issues surroudning the ```f, f_names = ShortTermFeatures.feature_extraction(x, Fs, int(0.0055*Fs), int(0.00229*Fs))``` array size. ```feature_extraction``` uses the arguments window (short-term window size) and step (the short-term window step). Changing these values changes the array size, however, the array does not reshape correctly. 
+
+Here is the directory map:   
+
+C:\Users\carol\OneDrive\Desktop\chao_py\audio_data
+│
+├── angry
+│   ├── 001_angry.wav
+│
+├── happy
+│   ├── 001_happy.wav
+│
+├── sad
+│   ├── 001_sad.wav
+│
+└── neutral
+    ├── 001_neutral.wav
+
+    
+``` python
+import os
+import pandas as pd
+from pyAudioAnalysis import audioBasicIO
+from pyAudioAnalysis import ShortTermFeatures
+import numpy as np
+
+
+
+# Function to extract pitch-related features from an audio file
+def extract_pitch_features(audio_file):
+    print(f"Processing file: {audio_file}")  # Debugging line
+    try:
+        [Fs, x] = audioBasicIO.read_audio_file(audio_file)
+    except Exception as e:
+        print(f"Error loading {audio_file}: {e}")
+        return None
+
+    # Extract short-term features
+    f, f_names = ShortTermFeatures.feature_extraction(x, Fs, int(0.0055*Fs), int(0.00229*Fs))
+    pitch_index = f_names.index('pitch')
+
+    # Get pitch values
+    pitch_values = f[pitch_index]
+
+    # Calculate pitch-related features
+    pitch_range = np.max(pitch_values) - np.min(pitch_values)
+    slope = np.polyfit(np.arange(len(pitch_values)), pitch_values, 1)[0]
+    mean_pitch = np.mean(pitch_values)
+    min_pitch = np.min(pitch_values)
+    max_pitch = np.max(pitch_values)
+    pitch_variability = np.std(pitch_values)
+
+    return {
+        'mean_pitch': mean_pitch,
+        'min_pitch': min_pitch,
+        'max_pitch': max_pitch,
+        'pitch_range': pitch_range,
+        'pitch_slope': slope,
+        'pitch_variability': pitch_variability
+    }
+
+# Function to collect all data
+def collect_data(directory):
+    data = []
+    for emotion in os.listdir(directory):
+        emotion_folder = os.path.join(directory, emotion)
+        if os.path.isdir(emotion_folder):
+            for audio_file in os.listdir(emotion_folder):
+                audio_file_path = os.path.join(emotion_folder, audio_file)
+                if audio_file_path.endswith('.wav'):
+                    # Extract participantID and emotion from the filename
+                    filename = os.path.basename(audio_file)
+                    parts = filename.split('_')
+                    if len(parts) == 2:  # Ensure the filename is correctly formatted (e.g., 001_angry.wav)
+                        participant_id = parts[0]
+                        emotion = parts[1].replace('.wav', '')  # Remove the .wav extension
+                        
+                        print(f"Found audio file: {audio_file_path} (Participant: {participant_id}, Emotion: {emotion})")
+                        
+                        # Extract pitch features
+                        features = extract_pitch_features(audio_file_path)
+                        
+                        if features:  # Only add features if they were successfully extracted
+                            features['emotion'] = emotion
+                            features['participantID'] = participant_id
+                            features['file_path'] = audio_file_path
+                            data.append(features)
+
+    # If data is collected, convert to DataFrame
+    if data:
+        df = pd.DataFrame(data)
+        return df
+    else:
+        print("No data was collected.")
+        return pd.DataFrame()  # Return an empty DataFrame if no features were extracted
+
+# Define the path to your recordings directory
+recordings_directory = r"C:\Users\carol\OneDrive\Desktop\chao_py\audio_data"
+
+# Collect data
+df = collect_data(recordings_directory)
+
+# If DataFrame is not empty, save it
+if not df.empty:
+    df.to_csv('emotion_pitch_data.csv', index=False)
+    print("Data saved to emotion_pitch_data.csv")
+else:
+    print("No data was extracted, please check the directory and files.")
+
+# Display the first few rows of the DataFrame
+print(df.head())
+```
+
+
+### Standardizing Pitch Features
+In order to accurately detect emotions based on pitch across all races, ages, and both sexes, we must find standard values for pitch and universal changes. The important features for emotion detection using pith are the following: mean pitch, min and max pitch, pitch range, pitch slope, and pitch variability. We will run an experiement with 10-15 diverse participants to analyze how these features change for each emotion. The participants will be asked to say the following statements in their normal tone (with a focus on the designated emotion): 
+
+Neutral: "Today feels pretty ordinday; nothing really exciting is happening. I'm just going through my usual routine, trying to stay productive and make the most of it."     
+Happy: "I'm over the moon about the promotion I just got at work! It’s such a great opportunity, and I can’t wait to take on new challenges and celebrate with friends."    
+Sad: "I'm feeling really down today. I just received some upsetting news about a close friend, and it’s hard to shake off the weight of that sadness."     
+Angry: "I'm incredibly frustrated with the way things are going right now. I can't believe you did that! Why can’t anyone see how frustrating this is? I’ve had it up to here."     
+
 
 ## Week of 10/28/24
 ### Goals 
