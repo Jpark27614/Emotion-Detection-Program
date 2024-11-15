@@ -9,6 +9,9 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
+### pyAudioAnalysis
+Resources:     
+https://dev.to/dolbyio/creating-audio-features-with-pyaudio-analysis-4mbp
 
 ## Week of 11/4/24
 ### Goals
@@ -22,18 +25,18 @@ This code takes a series of wav audio files and creates a data frame that contai
 Here is the directory map:   
 
 C:\Users\carol\OneDrive\Desktop\chao_py\audio_data
-│
-├── angry
-│   ├── 001_angry.wav
-│
-├── happy
-│   ├── 001_happy.wav
-│
-├── sad
-│   ├── 001_sad.wav
-│
-└── neutral
-    ├── 001_neutral.wav
+│     
+├── angry     
+│   ├── 001_angry.wav      
+│     
+├── happy      
+│   ├── 001_happy.wav     
+│     
+├── sad     
+│   ├── 001_sad.wav     
+│     
+└── neutral      
+    ├── 001_neutral.wav     
 
     
 ``` python
