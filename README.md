@@ -13,6 +13,8 @@ https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 Resources:     
 https://dev.to/dolbyio/creating-audio-features-with-pyaudio-analysis-4mbp
 
+
+Mid-term vs. short-term features: apply mid-term features to code in order to extract derivative values.    
 ## Week of 11/4/24
 ### Goals
 1. Design experiement to standarize pitch values.
