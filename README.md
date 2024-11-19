@@ -66,6 +66,88 @@ Selected params: 1.00000
 
 ```
 
+To test the file, the code script below is run: 
+```python
+# used trained model 
+# to classify an unknown emotion
+from pyAudioAnalysis import audioTrainTest as aT
+files_to_test = [r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_happy.wav",
+                 r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_disgust.wav",
+                 r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_neutral.wav", 
+                 r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_surprised.wav", 
+                 r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_angry.wav", 
+                 r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_neutral.wav"]
+for f in files_to_test:
+    print(f'{f}:')
+    c, p, p_nam = aT.file_classification(f, "svm_emotions","svm")
+    
+    # print probabilities for each emotion
+    for i in range(len(p_nam)):
+        print(f'P({p_nam[i]} = {p[i]:.2f})')
+    print()
+```
+
+
+It outputs: 
+
+```
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_happy.wav:
+P(neutral = 0.02)
+P(happy = 0.08)
+P(sad = 0.56)
+P(angry = 0.02)
+P(fearful = 0.05)
+P(disgust = 0.27)
+P(surprised = 0.01)
+
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_disgust.wav:
+P(neutral = 0.05)
+P(happy = 0.06)
+P(sad = 0.80)
+P(angry = 0.01)
+P(fearful = 0.02)
+P(disgust = 0.06)
+P(surprised = 0.00)
+
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\002_neutral.wav:
+P(neutral = 0.01)
+P(happy = 0.01)
+P(sad = 0.68)
+P(angry = 0.00)
+P(fearful = 0.03)
+P(disgust = 0.26)
+P(surprised = 0.00)
+
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_surprised.wav:
+P(neutral = 0.05)
+P(happy = 0.05)
+P(sad = 0.85)
+P(angry = 0.01)
+P(fearful = 0.03)
+P(disgust = 0.01)
+P(surprised = 0.00)
+
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_angry.wav:
+P(neutral = 0.04)
+P(happy = 0.04)
+P(sad = 0.82)
+P(angry = 0.01)
+P(fearful = 0.06)
+P(disgust = 0.03)
+P(surprised = 0.00)
+
+C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\test\003_neutral.wav:
+P(neutral = 0.02)
+P(happy = 0.04)
+P(sad = 0.70)
+P(angry = 0.01)
+P(fearful = 0.04)
+P(disgust = 0.19)
+P(surprised = 0.01)
+```
+
+For some reason, the model predicts "sad" for each audio file. 
+
 
 ### pyAudioAnalysis
 Resources:     
