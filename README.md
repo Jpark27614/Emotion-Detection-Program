@@ -1,4 +1,4 @@
-# EMODE: An Emotion Detection Program for Mental Well-being
+# EmoDe: An Emotion Detection Program for Mental Well-being
 
 ## Abstract
 EmoDe is an application focused on emotion detection using the OpenFace deep learning model for facial action unit analysis. Using inputs such as single persona and multi persona videos and images, the model outputs a video with facial landmarks and analysis of action units (AU), effectively transforming unstructured data to structured data ready for analysis. Action units measure the facial muscle movements defined by the Facial Action Coding System (FACS) in order to quanitfy emotions. For instance, happiness is defined as a nontrivial combination of AUs 6 and 12 (raised cheeks and a pulled corner lip). EmoDe parses through the intensity data for each AU, and determines the emotions displayed based on a given threshold. EMODE's robust capabilities enable a wide range of applications, particularly as human-robot interactions become increasingly prevalent and vital in everyday scenarios.
@@ -9,12 +9,68 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
+### SER Model
+While we tried to implement rule-based classification, after researching the pyAudioAnalysis library, it ended up being simpler to create a machine learning algorithm. Implementing rule-based classification would require extracting features and running an experiment to manually standardize audio features. In addition, there was significantly more documentation on pyAudioAnalysis for training and testing models than feature extraction. Once we decided to train and test a machine learning algorithm, we had to decide which one to implement. The two easiest algorithms to use with the pyAudioAnalysis library are kNNs and SVMs. These are described below:       
+
+| **Aspect**       | **k-Nearest Neighbors (kNN)**                                                                                                                                                    | **Support Vector Machines (SVM)**                                                                                                                                 |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Short Definition** | A simple algorithm that classifies data points based on the **majority class of the k nearest neighbors** using a chosen distance metric.                                       | A powerful classifier that finds the **optimal hyperplane** to separate different classes, using a **kernel trick** if necessary to transform data into higher dimensions. |
+| **Example** | Imagine a new fruit whose **weight** and **color** need to be classified as an apple or an orange. kNN would look at the **k nearest existing fruits** and classify it based on the majority. | The SVM would find a **line (or hyperplane)** that best separates apples from oranges in terms of weight and color, ensuring the maximum margin between classes.          |
+| **Pros**           | - Easy to implement and understand  <br> - No training phase required  <br> - Flexible to various distance metrics                                                               | - Effective in high-dimensional spaces <br> - Works well with clear class separation <br> - Can use different kernel functions for non-linear classification            |
+| **Cons**           | - Slow for large datasets, as it computes distances for every data point <br> - Sensitive to the choice of k and scaling of features <br> - Requires storing the entire dataset | - Can be complex to implement and train <br> - Sensitive to parameter settings <br> - Less effective with noisy or overlapping data, and computationally intensive   |
+
+
+We decided to train an SVM due to the multiclass classification of emotion detection (classes = happy, sad, angry, surprised, fearful, disgust, neutral). We used the [RAVDESS dataset](https://www.kaggle.com/datasets/uwrfkaggler/ravdess-emotional-speech-audio). The code to train and test the model is shown below (note that data must be organized in directories for each class in order to train and test models with pyAudioAnalysis). 
+
+```python
+from pyAudioAnalysis.audioTrainTest import extract_features_and_train
+mt, st = 1.0, 0.05
+dirs = [
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\neutral",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\happy",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\sad",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\angry",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\fearful",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\disgust",
+    r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\surprised"
+]
+
+extract_features_and_train(dirs, mt, mt, st, st, "svm", "svm_emotions")
+```
+
+After the training was complete, the following was printed: 
+
+
+```
+                neutral                 happy                   sad                     angry                   fearful                 disgust                 surprised       OVERALL
+        C       PRE     REC     f1      PRE     REC     f1      PRE     REC     f1      PRE     REC     f1      PRE     REC     f1      PRE     REC     f1      PRE     REC     f1       ACC     f1
+        0.001   0.0     0.0     0.0     35.7    27.9    31.3    34.3    54.8    42.2    49.4    54.8    52.0    44.4    38.0    40.9    36.6    49.1    41.9    50.7    42.2    46.1     41.0    36.3
+        0.010   33.1    43.0    37.4    40.6    34.5    37.3    42.6    47.0    44.7    60.0    60.4    60.2    48.0    51.4    49.7    46.9    48.4    47.7    57.9    46.0    51.3     47.6    46.9
+        0.500   35.1    50.4    41.4    34.7    42.4    38.2    39.3    40.6    39.9    53.8    53.9    53.9    46.9    44.8    45.9    56.0    41.2    47.5    56.2    46.9    51.2     45.3    45.4
+        1.000   34.5    48.5    40.3    42.1    49.1    45.3    43.5    44.8    44.1    53.1    57.1    55.0    54.5    47.2    50.6    50.9    42.5    46.3    56.0    45.6    50.3     47.7    47.4     best f1         best Acc
+        5.000   30.3    48.7    37.4    40.2    48.2    43.9    38.5    40.3    39.4    49.7    49.8    49.8    47.9    41.1    44.3    52.4    41.5    46.3    54.5    43.9    48.6     44.5    44.2
+        10.000  32.6    51.4    39.9    38.8    47.0    42.5    39.3    37.2    38.2    52.4    53.3    52.8    51.9    42.9    47.0    52.1    45.9    48.8    52.3    43.7    47.6     45.4    45.3
+        20.000  34.7    51.5    41.4    37.3    47.6    41.9    38.7    36.9    37.8    51.8    52.6    52.2    45.6    41.6    43.5    52.3    41.7    46.4    54.0    42.2    47.4     44.5    44.4
+Confusion Matrix:
+        neu     hap     sad     ang     fea     dis     sur
+neu     3.75    0.74    1.39    0.27    0.27    0.57    0.74
+hap     1.01    7.75    2.03    1.40    1.40    0.88    1.31
+sad     2.46    1.70    7.18    0.76    1.80    1.39    0.76
+ang     0.53    1.70    0.94    8.43    0.78    1.19    1.21
+fea     1.21    2.09    2.17    1.23    7.28    0.86    0.59
+dis     1.01    1.87    1.62    2.07    1.09    6.34    0.90
+sur     0.90    2.58    1.19    1.70    0.74    1.25    7.00
+Best macro f1 47.4
+Best macro f1 std 3.7
+Selected params: 1.00000
+
+```
+
+
 ### pyAudioAnalysis
 Resources:     
-https://dev.to/dolbyio/creating-audio-features-with-pyaudio-analysis-4mbp
-
-
-Mid-term vs. short-term features: apply mid-term features to code in order to extract derivative values.    
+https://dev.to/dolbyio/creating-audio-features-with-pyaudio-analysis-4mbp       
+https://medium.com/behavioral-signals-ai/intro-to-audio-analysis-recognizing-sounds-using-machine-learning-20fd646a0ec5
 ## Week of 11/4/24
 ### Goals
 1. Design experiement to standarize pitch values.
