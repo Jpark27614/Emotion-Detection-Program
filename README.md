@@ -146,8 +146,10 @@ P(disgust = 0.19)
 P(surprised = 0.01)
 ```
 
-For some reason, the model predicts "sad" for each audio file. 
+For some reason, the model predicts "sad" for each audio file. Some of the issues might be the following: 
 
+1. When training the model, the following line of code was used: ```extract_features_and_train(dirs, mt, mt, st, st, "svm", "svm_emotions")```. From the pyAudioAnalysis documentation we see that this function has the following syntax: ```feature_extraction_train(listOfDirs, mtWin, mtStep, stWin, stStep, classifierType, modelName, computeBEAT)```. For ```classifierType```, ```svm_rbf``` is used for RBF kernel, while ```svm``` for linear kernel. In our intial training of the model, we used a linear kernel, which will not work for the multiclass classification. We will train another model using ```svm_rbf```, as it attempts to create more complex decision boundaries that can handle non-linear relationships in the data. This kernel is more flexible and can adapt to a wider variety of data structures (not linearly separable).
+2. Preprocess data. 
 
 ### pyAudioAnalysis
 Resources:     
