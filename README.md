@@ -146,7 +146,7 @@ P(disgust = 0.19)
 P(surprised = 0.01)
 ```
 
-For some reason, the model predicts "sad" for each audio file. Some of the issues might be the following:     
+The model predicts "sad" for each audio file tested. Some of the issues might be the following:     
 
 1. Kernel Choice for SVM: When training the model, the following line of code was used: ```extract_features_and_train(dirs, mt, mt, st, st, "svm", "svm_emotions")```. From the pyAudioAnalysis documentation we see that this function has the following syntax: ```feature_extraction_train(listOfDirs, mtWin, mtStep, stWin, stStep, classifierType, modelName, computeBEAT)```. For ```classifierType```, ```svm_rbf``` is used for RBF kernel, while ```svm``` for linear kernel. In our intial training of the model, we used a linear kernel, which will not work for the multiclass classification. We will train another model using ```svm_rbf```, as it attempts to create more complex decision boundaries that can handle non-linear relationships in the data. This kernel is more flexible and can adapt to a wider variety of data structures (not linearly separable).
 2. Uneven Class Distribution: In the current dataset, the N=neutral emotion class has only half as many audio files as the other classes (96 versus 192). This imbalance can lead to biased classification results, where the model becomes more adept at identifying emotions with more data. To address this, we can either add more Neutral samples to balance the class distribution or apply data augmentation techniques, like pitch shifting or noise addition, to increase the number of Neutral samples artificially.
@@ -156,7 +156,8 @@ For some reason, the model predicts "sad" for each audio file. Some of the issue
 6. Computational Efficiency: If the training process is slow or inefficient, consider optimizing parameters like the mid-term and short-term window sizes. These parameters affect the number of features extracted and the computational complexity. Tuning them to achieve a balance between efficiency and accuracy can streamline the training process while maintaining model performance.
 
 ### pyAudioAnalysis
-Resources:     
+Resources:       
+https://github.com/tyiannak/pyAudioAnalysis/wiki/4.-Classification-and-Regression       
 https://dev.to/dolbyio/creating-audio-features-with-pyaudio-analysis-4mbp       
 https://medium.com/behavioral-signals-ai/intro-to-audio-analysis-recognizing-sounds-using-machine-learning-20fd646a0ec5
 ## Week of 11/4/24
