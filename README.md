@@ -248,10 +248,67 @@ There are now
 1,703 neutral files
 1,923 sad files
 
-Tried to use SMOTE* to balance classes, but the synthetic audio files were 1 second long and silent. 
+Augmented data to balance classes using librosa library. Details available at:  
 
+```python
+import os
+import librosa
+import numpy as np
+import soundfile as sf
 
-*SMOTE (Synthetic Minority Over-sampling Technique): This technique generates synthetic examples for the underrepresented classes (surprise and neutral) by creating new samples that are linear combinations of the minority class samples. 
+def augment_audio(audio, sr, method):
+    """Applies a specific augmentation method to the audio."""
+    if method == "pitch_up":
+        return librosa.effects.pitch_shift(y=audio, sr=sr, n_steps=2)  # Shift pitch up
+    elif method == "pitch_down":
+        return librosa.effects.pitch_shift(y=audio, sr=sr, n_steps=-4)  # Shift pitch down
+    elif method == "time_stretch":
+        return librosa.effects.time_stretch(y=audio, rate=1.2)  # Stretch time (faster)
+    else:
+        raise ValueError("Unknown augmentation method")
+
+def balance_class_folders(class_folders, target_count):
+    """
+    Balances the number of files in class folders by augmenting underrepresented classes.
+    
+    Args:
+    - class_folders (dict): A dictionary with class names as keys and folder paths as values.
+    - target_count (int): The target number of files per class.
+    """
+    augment_methods = ["pitch_up", "pitch_down", "time_stretch"]
+    
+    for class_name, folder_path in class_folders.items():
+        files = [f for f in os.listdir(folder_path) if f.endswith('.wav')]
+        num_files = len(files)
+        
+        if num_files < target_count:
+            print(f"Balancing {class_name}: {num_files} files -> {target_count} files")
+            for i in range(target_count - num_files):
+                original_file = os.path.join(folder_path, files[i % num_files])
+                audio, sr = librosa.load(original_file, sr=None)
+                
+                # Apply augmentation
+                method = augment_methods[i % len(augment_methods)]
+                augmented_audio = augment_audio(audio, sr, method)
+                
+                # Save augmented file
+                new_filename = f"{os.path.splitext(files[i % num_files])[0]}_aug{i}.wav"
+                sf.write(os.path.join(folder_path, new_filename), augmented_audio, sr)
+
+# Example usage
+class_folders = {
+    "surprise": r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\surprise",
+    "neutral": r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data\neutral",
+}
+target_count = 1923  # Match the largest class
+balance_class_folders(class_folders, target_count)
+```
+
+Now all classes have 1, 923 files. Here is an example of an augmented surprise file: 
+
+Original file: 
+
+Augmented file (increase pitch and time stretch): 
 
 ### pyAudioAnalysis
 Resources:       
