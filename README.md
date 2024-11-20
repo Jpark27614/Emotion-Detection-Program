@@ -155,6 +155,104 @@ The model predicts "sad" for each audio file tested. Some of the issues might be
 5. Data Preprocessing Consistency: It's important to ensure that all audio files are preprocessed uniformly. Variations in sample rates, loudness levels, or background noise can reduce the model's performance. Preprocess the RAVDESS files (and any additional datasets) to have the same sample rate (e.g., 16 kHz), normalize audio levels, and remove noise if necessary. This step will improve the model's ability to learn from consistent and high-quality data.
 6. Computational Efficiency: If the training process is slow or inefficient, consider optimizing parameters like the mid-term and short-term window sizes. These parameters affect the number of features extracted and the computational complexity. Tuning them to achieve a balance between efficiency and accuracy can streamline the training process while maintaining model performance.
 
+
+The TESS, CREMA-D, and SAVEE datasets were added to improve accuracy of the model. In order to organize the files into the class folders, the following code script was run: 
+
+```python
+import os
+import shutil
+
+# Define source directories for each dataset
+tess_dir = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\TESS_ds\TESS Toronto emotional speech set data"
+crema_dir = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\CREMA-D_ds\AudioWAV"
+savee_dir = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\SAVEE_ds\ALL"
+
+# Define target directory
+target_dir = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data"
+
+# Helper function to move files and skip if already exists
+def move_file_to_class_folder(source_path, class_name):
+    target_path = os.path.join(target_dir, class_name)
+    if not os.path.exists(target_path):
+        os.makedirs(target_path)
+    
+    # Skip moving if the file already exists
+    target_file_path = os.path.join(target_path, os.path.basename(source_path))
+    if not os.path.exists(target_file_path):
+        shutil.move(source_path, target_file_path)
+
+# Process TESS
+tess_map = {"neutral": "neutral", "happy": "happy", "sad": "sad", "disgust": "disgust", "angry": "angry", "fear": "fear"}
+for root, _, files in os.walk(tess_dir):
+    for file in files:
+        if file.endswith(".wav"):
+            if "neutral" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "neutral")
+            elif "happy" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "happy")
+            elif "sad" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "sad")
+            elif "disgust" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "disgust")
+            elif "angry" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "angry")
+            elif "fear" in file.lower():
+                move_file_to_class_folder(os.path.join(root, file), "fear")
+
+# Process CREMA-D
+crema_map = {
+    "NEU": "neutral",
+    "HAP": "happy",
+    "SAD": "sad",
+    "ANG": "angry",
+    "FEA": "fear",
+    "DIS": "disgust"
+}
+for root, _, files in os.walk(crema_dir):
+    for file in files:
+        if file.endswith(".wav"):
+            emotion_code = file.split("_")[2]  # Adjust this split based on your file naming
+            if emotion_code in crema_map:
+                move_file_to_class_folder(os.path.join(root, file), crema_map[emotion_code])
+
+# Process SAVEE
+savee_map = {
+    "sa": "sad",  # updated to match emotion prefix
+    "h": "happy",
+    "a": "angry",
+    "f": "fear",
+    "d": "disgust",
+    "n": "neutral", 
+    "su": "surprise"
+}
+for root, _, files in os.walk(savee_dir):
+    for file in files:
+        if file.endswith(".wav"):
+            emotion_prefix = file[3:5] if file[3:5] in savee_map else file[3:4]  # Check for two-character or one-character emotion
+            print(f"Processing {file}, Emotion Prefix: {emotion_prefix}")  # Debugging line
+            if emotion_prefix in savee_map:
+                move_file_to_class_folder(os.path.join(root, file), savee_map[emotion_prefix])
+            else:
+                print(f"Unknown Emotion Prefix: {emotion_prefix}")  # Debugging line
+
+print("Files from TESS, CREMA-D, and SAVEE have been organized into their respective class folders.")
+
+```
+
+There are now 
+652 surprise files
+1,923 angry files
+1,923 disgust files
+1,923 fear files
+1,923 happy files
+1,703 neutral files
+1,923 sad files
+
+Tried to use SMOTE* to balance classes, but the synthetic audio files were 1 second long and silent. 
+
+
+*SMOTE (Synthetic Minority Over-sampling Technique): This technique generates synthetic examples for the underrepresented classes (surprise and neutral) by creating new samples that are linear combinations of the minority class samples. 
+
 ### pyAudioAnalysis
 Resources:       
 https://github.com/tyiannak/pyAudioAnalysis/wiki/4.-Classification-and-Regression       
