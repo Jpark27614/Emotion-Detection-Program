@@ -304,11 +304,73 @@ target_count = 1923  # Match the largest class
 balance_class_folders(class_folders, target_count)
 ```
 
-Now all classes have 1, 923 files. Here is an example of an augmented surprise file: 
+Now all classes have 1, 923 files. We can preprocess the data for consistency before training the model. 
 
-Original file: 
+We use librosa to ensure all files have a uniform format (sample rate, trimmed silence, amplitude normalization, length standardization) for feature extraction and model input. 
 
-Augmented file (increase pitch and time stretch): 
+```python
+import os
+import librosa
+import soundfile as sf
+
+# Target parameters
+TARGET_SAMPLE_RATE = 16000
+TARGET_DURATION = 3.0  # in seconds
+
+# Function to preprocess a single file
+def preprocess_audio(file_path, output_path):
+    # Load audio file
+    audio, sr = librosa.load(file_path, sr=None)
+    
+    # Resample
+    if sr != TARGET_SAMPLE_RATE:
+        audio = librosa.resample(audio, orig_sr=sr, target_sr=TARGET_SAMPLE_RATE)
+        sr = TARGET_SAMPLE_RATE
+
+    # Normalize amplitude
+    audio = librosa.util.normalize(audio)
+
+    # Trim silence
+    audio, _ = librosa.effects.trim(audio)
+
+    # Standardize length (trim/pad)
+    target_length = int(TARGET_SAMPLE_RATE * TARGET_DURATION)
+    if len(audio) > target_length:
+        audio = audio[:target_length]
+    else:
+        audio = librosa.util.fix_length(audio, size=target_length)
+    
+    # Save the processed audio
+    sf.write(output_path, audio, sr)
+
+# Process all files in a class folder
+def process_class_folder(input_folder, output_folder):
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    for file_name in os.listdir(input_folder):
+        if file_name.endswith('.wav'):
+            input_path = os.path.join(input_folder, file_name)
+            output_path = os.path.join(output_folder, file_name)
+            preprocess_audio(input_path, output_path)
+
+# Main function to process all class folders
+def process_all_classes(input_root, output_root):
+    for class_folder in os.listdir(input_root):
+        input_path = os.path.join(input_root, class_folder)
+        output_path = os.path.join(output_root, class_folder)
+        if os.path.isdir(input_path):
+            process_class_folder(input_path, output_path)
+
+# Input and output directories
+input_root = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data"
+output_root = r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed"
+
+# Run the preprocessing
+process_all_classes(input_root, output_root)
+print("Preprocessing complete!")
+
+```
 
 ### pyAudioAnalysis
 Resources:       
