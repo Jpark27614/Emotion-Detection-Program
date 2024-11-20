@@ -248,7 +248,7 @@ There are now
 1,703 neutral files
 1,923 sad files
 
-Augmented data to balance classes using librosa library. Details available at:  
+Augmented data to balance classes using librosa library. Details available at:  [Librosa Documentation](https://librosa.org/doc/main/generated/librosa.effects.pitch_shift.html#librosa.effects.pitch_shift). 
 
 ```python
 import os
