@@ -9,6 +9,203 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
+### SVM Classifier Training and Testing
+The first two models had low accuracy due to overfitting (no specific parameters/features), so we trained a third model using the following audio features: pitch, energy, MCFFs, spectral centroid, and chroma.     
+
+First, we extracted the audio features and stored them in a feature matrix using librosa: 
+
+``` python
+import os
+import numpy as np
+import librosa
+from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from pyAudioAnalysis.audioTrainTest import train_svm
+
+# List of emotion classes and their corresponding directories
+classes = ["angry", "happy", "neutral", "surprise", "fear", "disgust", "sad"]
+data_dirs = {
+    "angry" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\angry",
+    "happy" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\happy",
+    "neutral" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\neutral",
+    "surprise" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\surprise",
+    "fear" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\fear",
+    "disgust" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\disgust",
+    "sad" : r"C:\Users\carol\OneDrive\Desktop\chao_py\emo_classification\data_processed\sad"
+}
+
+# Function to extract features for a given file
+def extract_features(file_path):
+    y, sr = librosa.load(file_path, sr=None)
+
+    # Energy
+    energy = np.sum(y ** 2) / len(y)
+
+    # Spectral Centroid
+    spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
+
+    # Pitch (Fundamental Frequency)
+    pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
+    pitch = np.mean(pitches[pitches > 0]) if len(pitches[pitches > 0]) > 0 else 0
+
+    # Chroma Features
+    chroma = np.mean(librosa.feature.chroma_stft(y=y, sr=sr), axis=1)
+
+    # MFCCs
+    mfccs = np.mean(librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13).T, axis=0)
+
+    # Combine features
+    return np.hstack([energy, spectral_centroid, pitch, chroma, mfccs])
+
+# Extract features for all files
+X = []  # Feature matrix
+y = []  # Labels
+for label, emotion in enumerate(classes):
+    print(f"Processing emotion: {emotion}")
+    for file in os.listdir(data_dirs[emotion]):
+        file_path = os.path.join(data_dirs[emotion], file)
+        features = extract_features(file_path)
+        print(f"Extracting files for: {file_path}")
+        X.append(features)
+        y.append(label)
+
+X = np.array(X)
+y = np.array(y)
+
+# Normalize the features
+scaler = StandardScaler()
+X_normalized = scaler.fit_transform(X)
+
+# Output the normalized features and labels
+print(f"Feature Matrix Shape: {X_normalized.shape}")
+print(f"Labels Shape: {y.shape}")
+
+
+np.save("features.npy", X)  # Save feature matrix
+np.save("labels.npy", y)   # Save labels
+
+```
+
+Next, we take these stored matrices to train and test the model. Cross verification was used for the train-test strategy. Cross-validation is a technique used to evaluate the performance of a machine learning model by splitting the dataset into multiple subsets (or "folds"). The model is trained on some folds and tested on the remaining fold, repeating this process so that each fold serves as a test set once. This helps ensure the model's performance is generalizable to unseen data, reducing the risk of overfitting. The results are averaged across all folds to provide a more reliable accuracy estimate.
+We will use k = 5 folds. 
+
+```python
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.svm import SVC
+import numpy as np
+
+# Load your features and labels
+X = np.load("features.npy")
+y = np.load("labels.npy")
+
+# Define your model
+svm_model = SVC(kernel="rbf", C=1.0, gamma="scale", random_state=42)
+
+# Perform stratified k-fold cross-validation
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)  # 5-fold CV
+
+# Evaluate using cross_val_score
+scores = cross_val_score(svm_model, X, y, cv=skf, scoring='accuracy')
+
+# Print results
+print("Cross-Validation Accuracy Scores:", scores)
+print("Average Accuracy:", np.mean(scores))
+```
+
+This outputted a SVM classifier with the following accuracy: 
+
+```
+Cross-Validation Accuracy Scores: [0.34236911 0.31426449 0.3384101  0.33692422 0.33543834]
+Average Accuracy: 0.33348125043795784
+```
+
+This is a decent starting accuracy at 33.3% as random guessing would give about 14.3% accuracy. To improve the accuracy, we can hypertune parameters (C and gamma). We use cross-validation can help identify the optimal values by providing robust evaluation scores for each configuration.
+
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# Load your features and labels
+X = np.load("features.npy")
+y = np.load("labels.npy")
+
+# Normalize the features
+scaler = StandardScaler()
+X_normalized = scaler.fit_transform(X)
+
+# Define the parameter grid
+param_grid = {
+    'C': [0.1, 1, 10, 100, 1000],
+    'gamma': [0.0001, 0.001, 0.01, 0.1, 1, 'scale']
+}
+
+# Initialize GridSearchCV with SVM (RBF kernel)
+grid_search = GridSearchCV(
+    SVC(kernel='rbf', class_weight='balanced'),
+    param_grid,
+    cv=5,  # 5-fold cross-validation
+    scoring='accuracy',
+    verbose=2
+)
+
+# Fit grid search on normalized features
+grid_search.fit(X_normalized, y)
+
+# Display the best parameters and accuracy
+print("Best parameters:", grid_search.best_params_)
+print("Best accuracy:", grid_search.best_score_)
+
+```
+This outputs the following:     
+```
+Best parameters: {'C': 100, 'gamma': 0.01}
+Best accuracy: 0.4358617548440208
+```
+
+We apply these parameters and assess the confusion matrix: 
+
+```python
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load your data
+X = np.load("features.npy")
+y = np.load("labels.npy")
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the SVM model with the best hyperparameters
+model = SVC(C=100, gamma=0.01)
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Generate confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Visualize the confusion matrix using a heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Sad', 'Surprised', 'Neutral', 'Happy', 'Fear', 'Disgust', 'Anger'], yticklabels=['Sad', 'Surprised', 'Neutral', 'Happy', 'Fear', 'Disgust', 'Anger'])
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+
+# Optionally, print the confusion matrix to the console
+print("Confusion Matrix:\n", cm)
+
+
+```
 ### SER Model
 While we are working on rule-based classification, after researching the pyAudioAnalysis library, we have found sufficient documentation for how to create a machine learning algorithm. Implementing rule-based classification would require extracting features and running an experiment to manually standardize audio features which might be more time consuming. In addition, there was significantly more documentation on pyAudioAnalysis for training and testing models than feature extraction. Once we decided to train and test a machine learning algorithm, we had to decide which one to implement. The two easiest algorithms to use with the pyAudioAnalysis library are kNNs and SVMs. These are described below:       
 
