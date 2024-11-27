@@ -205,7 +205,10 @@ plt.show()
 print("Confusion Matrix:\n", cm)
 
 
+
 ```
+![CM_svm1](https://github.com/user-attachments/assets/447635ee-279c-4090-95e5-5ad510123b09)
+
 ### SER Model
 While we are working on rule-based classification, after researching the pyAudioAnalysis library, we have found sufficient documentation for how to create a machine learning algorithm. Implementing rule-based classification would require extracting features and running an experiment to manually standardize audio features which might be more time consuming. In addition, there was significantly more documentation on pyAudioAnalysis for training and testing models than feature extraction. Once we decided to train and test a machine learning algorithm, we had to decide which one to implement. The two easiest algorithms to use with the pyAudioAnalysis library are kNNs and SVMs. These are described below:       
 
