@@ -10,9 +10,10 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
 ### SVM Classifier Training and Testing
-
+Figures on model accuracy:    
 ![CM_svm1](https://github.com/user-attachments/assets/447635ee-279c-4090-95e5-5ad510123b09)
 ![feature_visual](https://github.com/user-attachments/assets/4274ff59-13f9-4805-ab6f-73b5a3149a1e)
+![feature_correlation](https://github.com/user-attachments/assets/952bc431-e014-4145-ad15-bd7a870f5a39)
 
 The first two models had low accuracy due to overfitting (no specific parameters/features), so we trained a third model using the following audio features: pitch, energy, MCFFs, spectral centroid, and chroma.     
 
