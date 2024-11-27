@@ -10,6 +10,10 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
 ### SVM Classifier Training and Testing
+
+![CM_svm1](https://github.com/user-attachments/assets/447635ee-279c-4090-95e5-5ad510123b09)
+![feature_visual](https://github.com/user-attachments/assets/4274ff59-13f9-4805-ab6f-73b5a3149a1e)
+
 The first two models had low accuracy due to overfitting (no specific parameters/features), so we trained a third model using the following audio features: pitch, energy, MCFFs, spectral centroid, and chroma.     
 
 First, we extracted the audio features and stored them in a feature matrix using librosa: 
@@ -207,7 +211,6 @@ print("Confusion Matrix:\n", cm)
 
 
 ```
-![CM_svm1](https://github.com/user-attachments/assets/447635ee-279c-4090-95e5-5ad510123b09)
 
 ### SER Model
 While we are working on rule-based classification, after researching the pyAudioAnalysis library, we have found sufficient documentation for how to create a machine learning algorithm. Implementing rule-based classification would require extracting features and running an experiment to manually standardize audio features which might be more time consuming. In addition, there was significantly more documentation on pyAudioAnalysis for training and testing models than feature extraction. Once we decided to train and test a machine learning algorithm, we had to decide which one to implement. The two easiest algorithms to use with the pyAudioAnalysis library are kNNs and SVMs. These are described below:       
