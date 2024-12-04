@@ -10,6 +10,11 @@ EmoDe will prompt the user with personal questions to elicit an emotional respon
 https://github.com/user-attachments/assets/0549635f-c8b5-40c8-9dfa-6d20df7d3eaa
 
 ### SVM Classifier Training and Testing
+Given the initial low model accuracy, we limited the extracted features in order to reduce chances of overfitting. Here is the new model confusion matrix, which shows an increase from 45% accuracy to 61% accuracy: 
+
+![svm_emotion_model](https://github.com/user-attachments/assets/a0d2f885-4f4f-48f8-a922-827d6996e49c)
+
+
 Figures on model accuracy:    
 ![CM_svm1](https://github.com/user-attachments/assets/447635ee-279c-4090-95e5-5ad510123b09)
 ![feature_visual](https://github.com/user-attachments/assets/4274ff59-13f9-4805-ab6f-73b5a3149a1e)
