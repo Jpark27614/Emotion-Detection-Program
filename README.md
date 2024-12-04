@@ -20,7 +20,7 @@ Figures on model accuracy:
 ![feature_visual](https://github.com/user-attachments/assets/4274ff59-13f9-4805-ab6f-73b5a3149a1e)
 ![feature_correlation](https://github.com/user-attachments/assets/952bc431-e014-4145-ad15-bd7a870f5a39)
 
-The first two models had low accuracy due to overfitting (no specific parameters/features), so we trained a third model using the following audio features: pitch, energy, MCFFs, spectral centroid, and chroma.     
+The first two models had low accuracy due to overfitting (no specific parameters/features), so we trained a third model using the following audio features: pitch, energy, MFCCs, spectral centroid, and chroma.     
 
 First, we extracted the audio features and stored them in a feature matrix using librosa: 
 
@@ -718,11 +718,11 @@ Angry: "I'm incredibly frustrated with the way things are going right now. I can
 
 ## Week of 10/28/24
 ### Goals 
-1. Analyze pitch and MCFFs graphs for emotion set (happiness, sadness, anger, fear, surprise, disgust). Note major characteristics and compare to research findings.
-2. Write emotion detection function using audio features based on analysis of pitch and MCFFs. 
+1. Analyze pitch and MFCCs graphs for emotion set (happiness, sadness, anger, fear, surprise, disgust). Note major characteristics and compare to research findings.
+2. Write emotion detection function using audio features based on analysis of pitch and MFCCs. 
 
 ### Emotion Detection using Pitch 
-The analysis of audio features including pitch and MCFFs below has led to the conclusion that pitch is the easiest and most helpful data point to analyze in order to detect emotions. The following code script used the information collected during data analysis below and the Audio Features and Emotions table. 
+The analysis of audio features including pitch and MFCCs below has led to the conclusion that pitch is the easiest and most helpful data point to analyze in order to detect emotions. The following code script used the information collected during data analysis below and the Audio Features and Emotions table. 
 
 ``` python
 import librosa
@@ -801,12 +801,12 @@ file_path = r"C:\Users\cchao2869\Desktop\pyAudio\happy_ex.wav"
 emotion = detect_emotion(file_path)
 print(f"Detected Emotion: {emotion}")
 ```
-### Pitch and MCFFs Graph Analysis
+### Pitch and MFCCs Graph Analysis
 
-Using the code below, several audio files were tested where the speaker attempted to exemplify each of the emotions: happiness, sadness, anger, surprise, fear, and disgust. Data was extracted for the pitch and mel-frequency cepstral coefficients (MFCCs) of each audio file. MFCCs capture the timbral features of the audio, reflecting the texture and quality of the sound. Higher MFCC values may indicate brighter, richer sounds, while lower values might suggest dull or flat sounds. One limitation of the MCFF data is that it appears that the values are 0 for the majority of coefficients. Analysis of the pitch and MCFFs diagrams for each emotion is described below: 
+Using the code below, several audio files were tested where the speaker attempted to exemplify each of the emotions: happiness, sadness, anger, surprise, fear, and disgust. Data was extracted for the pitch and mel-frequency cepstral coefficients (MFCCs) of each audio file. MFCCs capture the timbral features of the audio, reflecting the texture and quality of the sound. Higher MFCC values may indicate brighter, richer sounds, while lower values might suggest dull or flat sounds. One limitation of the MFCC data is that it appears that the values are 0 for the majority of coefficients. Analysis of the pitch and MFCCs diagrams for each emotion is described below: 
 
-#### Interpreting MCFFs Graphs
-While the graphs for pitch are fairly straightforward, those for MCFFs can be more complicated to analyze. Some general guidelines are below to simplify the process: 
+#### Interpreting MFCCs Graphs
+While the graphs for pitch are fairly straightforward, those for MFCCs can be more complicated to analyze. Some general guidelines are below to simplify the process: 
 
 1. X-axis: Time in seconds, Y-axis: MFCC coefficient index (1 to 13)
 2. Color: Red (High Values) - Higher amplitudes of the MFCC coefficients. This suggests that the specific timbral features captured by those coefficients are more pronounced in the audio signal during those time frames.     
@@ -814,35 +814,35 @@ Blue (Low Values) - Lower amplitudes of the MFCC coefficients, suggesting that t
 
 #### Fear
 Pitch: Fear is characterized by sharp rises in pitch. This is shown on the graph below at frame 325.    
-MCFFs: The shaky, sharp audio quality displayed in fear is visible in the graph for MCFFs as well. As shown in the higher MCFFs (10-13), the timbre of the audio shifts quickly.  
+MFCCs: The shaky, sharp audio quality displayed in fear is visible in the graph for MFCCs as well. As shown in the higher MFCCs (10-13), the timbre of the audio shifts quickly.  
 ![fear_ex](https://github.com/user-attachments/assets/3dfdbe37-66d8-4efe-843a-0a64b786e41b)
 
-![fear_mcffs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
+![fear_MFCCs](https://github.com/user-attachments/assets/6304e4ba-39a2-4229-bf5e-54db47f3b4f3)
 
 #### Happiness
 Pitch: Happiness is characterized by a consitent shift from low to high. This is shown from fram 200 to 400. Note: audio began before speech, so data from (0, 2)U(4.5, 6) can be disregarded.      
-MCFFs: From 2-4.5 seconds, a visible change is evident in the MCFFs graph. This is consistent with the shift in pitch during frames 200 to 400. 
+MFCCs: From 2-4.5 seconds, a visible change is evident in the MFCCs graph. This is consistent with the shift in pitch during frames 200 to 400. 
 ![happy_pitch](https://github.com/user-attachments/assets/5215c441-15a7-41d5-a7eb-669e6fbef05f)
 
-![happy_mcffs](https://github.com/user-attachments/assets/b6152792-25ef-48a8-8353-ed6ea4dfa60d)
+![happy_MFCCs](https://github.com/user-attachments/assets/b6152792-25ef-48a8-8353-ed6ea4dfa60d)
 
 #### Sadness
 Pitch: Sadness is characterized by a low pitch with little variations. This is shown below because the X-axis (pitch in dB) ranges from 60 to 160, and is almost always at around 110 dB.      
-MCFFs: The MCFFs data below shows consistently low MCFFs values during the interval of speech. This aligns with the characteristics of sadness as low, dull, and flat timbre. 
+MFCCs: The MFCCs data below shows consistently low MFCCs values during the interval of speech. This aligns with the characteristics of sadness as low, dull, and flat timbre. 
 ![sad_pitch](https://github.com/user-attachments/assets/e3eeb22b-1da1-4f18-b7f9-89df5886c961)
 
-![sad_mcffs](https://github.com/user-attachments/assets/80e6febe-37fd-4657-81d8-3f5c5f5427e4)
+![sad_MFCCs](https://github.com/user-attachments/assets/80e6febe-37fd-4657-81d8-3f5c5f5427e4)
 
 #### Anger
 Pitch: Anger is characterized by high variations in pitch. This is evident in the range of pitch from 50-250 frames.    
 ![anger_pitch](https://github.com/user-attachments/assets/5d273698-50e1-4e1c-8f7f-984248bc4495)
-![anger_mcffs](https://github.com/user-attachments/assets/3025edbe-3fcf-4713-9300-91a487fc52d3)
+![anger_MFCCs](https://github.com/user-attachments/assets/3025edbe-3fcf-4713-9300-91a487fc52d3)
 
 
 #### Disgust 
 ![disgust_pitch](https://github.com/user-attachments/assets/6e1860f1-f889-4818-b1fe-58ac09063515)
 
-![disgust_mcffs](https://github.com/user-attachments/assets/75cfb177-1fb8-4e53-9a41-b95fca5a90b7)
+![disgust_MFCCs](https://github.com/user-attachments/assets/75cfb177-1fb8-4e53-9a41-b95fca5a90b7)
 
 
 #### Surprise
